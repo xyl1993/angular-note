@@ -1,0 +1,38 @@
+/* You can add global styles to this file, and also import other style files */
+* {
+  margin: 0px;
+  padding: 0px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; font-size: 14px;
+  -webkit-font-smoothing: antialiased;}
+  input,
+  button,
+  select,
+  textarea,
+  a {
+    outline: none;
+  }
+  textarea {
+    resize: none;
+  }
+  .clear {
+    &:after {
+      clear: both;
+      content: "";
+      display: table;
+    }
+  }
+  input:-webkit-autofill {
+    background-color:#fff;
+    box-shadow: 0 0 0px 1000px white inset;
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+  }
+  .text-ellipsis{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
