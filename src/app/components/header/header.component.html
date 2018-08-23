@@ -18,14 +18,14 @@
       </div>
       <div class="flat-tight-scrollbar" *ngIf="infoStatusObject.showStatus">
         <ul class="msg-list-tools">
-          <li class="msg-type-btn-ctn">
-            <a class="msg-btn">近期消息</a>
+          <li class="msg-type-btn-ctn" (click)="newsClick(1)">
+            <a class="msg-btn" [ngClass]="{'active':infoStatusObject.index===1}">近期消息</a>
           </li>
-          <li class="msg-type-btn-ctn">
-            <a class="msg-btn active">未读消息</a>
+          <li class="msg-type-btn-ctn" (click)="newsClick(2)">
+            <a class="msg-btn" [ngClass]="{'active':infoStatusObject.index===2}">未读消息</a>
           </li>
         </ul>
-        <ul class="msg-list" style="display:none;">
+        <ul class="msg-list" *ngIf="newsInfoList.length>0">
           <li class="msg-list-item">
             <div class="sender">
               <img src="https://note.wiz.cn/web/layout/img/common/system_msg.67a6c553.png" alt="">
@@ -40,7 +40,7 @@
             </div>
           </li>
         </ul>
-        <ul class="no-message">
+        <ul class="no-message" *ngIf="newsInfoList.length===0">
           <div>
             <img src="https://note.wiz.cn/web/layout/img/common/smile_gray.dbf7e909.png" alt="">
             <span data-lang="docMsg.label.unReadIsEmpty">消息全都读完啦！</span>
@@ -49,10 +49,10 @@
       </div>
     </div>
     <div class="user-icon-cointer">
-      <div class="user-icon">
+      <div class="user-icon" (click)="userClick()">
         <img src="https://note.wiz.cn/as/user/avatar/1361ef97-bfdf-4dfe-8af1-ce96f8426773?default=true&_1535007844607" alt="">
       </div>
-      <div class="pop-user-setting">
+      <div class="pop-user-setting" *ngIf="userStatus">
         <ul>
           <li class="user-name-menu">
             <span>zzdd</span>

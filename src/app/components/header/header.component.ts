@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  public infoStatusObject = {
-    showStatus:false
+  infoStatusObject = {
+    showStatus:false,  //是否显示弹窗
+    index:1           //近期消息
   }
+
+  userStatus = false;
+
+  newsInfoList=[];
 
   constructor() { }
 
@@ -17,6 +22,16 @@ export class HeaderComponent implements OnInit {
   }
 
   infoClick(){
+    this.userStatus = this.userStatus && false;
     this.infoStatusObject.showStatus = !this.infoStatusObject.showStatus;
+  }
+
+  userClick(){
+    this.infoStatusObject.showStatus = this.infoStatusObject.showStatus && false;
+    this.userStatus = !this.userStatus;
+  }
+
+  newsClick(index){
+    this.infoStatusObject.index = index;
   }
 }

@@ -1,0 +1,21 @@
+.note-main{
+  display: flex;
+  position: absolute;
+  top: 40px;
+  bottom: 0px;
+  overflow: hidden;
+  width: 100%;
+  min-height: 400px;
+}
+.content-container{
+  flex: 1;
+  overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
+  .content-wrapper{
+    width: 100%;
+    box-sizing: border-box;
+    flex: 1;
+    display: flex;
+  }
+}
