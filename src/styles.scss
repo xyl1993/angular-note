@@ -7,32 +7,38 @@
   box-sizing: border-box;
 }
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; font-size: 14px;
-  -webkit-font-smoothing: antialiased;}
-  input,
-  button,
-  select,
-  textarea,
-  a {
-    outline: none;
+body {
+   margin: 0;
+   font-family: Helvetica,"Hiragino Sans GB","微软雅黑","Microsoft YaHei UI",SimSun,SimHei,arial,sans-serif;
+   font-size: 14px;
+}
+input,
+button,
+select,
+textarea,
+a {
+  outline: none;
+}
+ul,li{
+  list-style: none;
+}
+textarea {
+  resize: none;
+}
+.clear {
+  &:after {
+    clear: both;
+    content: "";
+    display: table;
   }
-  textarea {
-    resize: none;
-  }
-  .clear {
-    &:after {
-      clear: both;
-      content: "";
-      display: table;
-    }
-  }
-  input:-webkit-autofill {
-    background-color:#fff;
-    box-shadow: 0 0 0px 1000px white inset;
-    -webkit-box-shadow: 0 0 0px 1000px white inset;
-  }
-  .text-ellipsis{
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
+}
+input:-webkit-autofill {
+  background-color:#fff;
+  box-shadow: 0 0 0px 1000px white inset;
+  -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+.text-ellipsis{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

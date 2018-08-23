@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
+  public infoStatusObject = {
+    showStatus:false
+  }
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  infoClick(){
+    this.infoStatusObject.showStatus = !this.infoStatusObject.showStatus;
+  }
 }

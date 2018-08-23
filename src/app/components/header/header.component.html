@@ -1,3 +1,69 @@
-<div class="header-cointer">
-  header
-</div>
+<header class="header-cointer">
+  <div class="menu-tag">
+    <ul>
+      <li class="item1"></li>
+      <li class="item2"></li>
+      <li class="item3"></li>
+    </ul>
+  </div>
+  <div class="menu-info">
+    <h3>个人笔记</h3>
+    <i class="iconfont icon-jiantou_down"></i>
+  </div>
+  <div class="user-info">
+    <div class="user-info-cointer">
+      <div class="user-msg" (click)="infoClick()">
+        <i class="iconfont icon-xiaoxi"></i>
+        <span class="info">消息</span>
+      </div>
+      <div class="flat-tight-scrollbar" *ngIf="infoStatusObject.showStatus">
+        <ul class="msg-list-tools">
+          <li class="msg-type-btn-ctn">
+            <a class="msg-btn">近期消息</a>
+          </li>
+          <li class="msg-type-btn-ctn">
+            <a class="msg-btn active">未读消息</a>
+          </li>
+        </ul>
+        <ul class="msg-list" style="display:none;">
+          <li class="msg-list-item">
+            <div class="sender">
+              <img src="https://note.wiz.cn/web/layout/img/common/system_msg.67a6c553.png" alt="">
+            </div>
+            <div class="msg-detail">
+              <p class="info">
+                <span>帮助手册和反馈渠道 | Manual And Feedback</span>
+              </p>
+              <p class="time">
+                <span>2018-04-19 08:53</span>
+              </p>
+            </div>
+          </li>
+        </ul>
+        <ul class="no-message">
+          <div>
+            <img src="https://note.wiz.cn/web/layout/img/common/smile_gray.dbf7e909.png" alt="">
+            <span data-lang="docMsg.label.unReadIsEmpty">消息全都读完啦！</span>
+          </div>
+        </ul>
+      </div>
+    </div>
+    <div class="user-icon-cointer">
+      <div class="user-icon">
+        <img src="https://note.wiz.cn/as/user/avatar/1361ef97-bfdf-4dfe-8af1-ce96f8426773?default=true&_1535007844607" alt="">
+      </div>
+      <div class="pop-user-setting">
+        <ul>
+          <li class="user-name-menu">
+            <span>zzdd</span>
+            <div class="wiz-pay">购买 VIP</div>
+          </li>
+          <li class="item-content">
+            <i class="iconfont icon-zhuxiao"></i>
+            <span>注销</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>
