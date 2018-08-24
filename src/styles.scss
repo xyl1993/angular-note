@@ -112,6 +112,7 @@ app-cointer{
     display: flex;
     flex: 1;
     flex-direction: column;
+    z-index: 99 !important;
   }
   .edui-editor div{
     width: auto !important;
