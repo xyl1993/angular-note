@@ -1,0 +1,141 @@
+<div class="cointer">
+  <section class="menu-tree" [ngClass]="{'smile':smileStatus}">
+    <div class="menu-tree-box">
+      <div class="toolbar">
+        <ul class="menu-nail">
+          <div class="icon-right-div" (click)="smilClick()">
+            <i class="my-icon icon-to-right"></i>
+          </div>
+        </ul>
+      </div>
+      <div class="content">
+        <ul>
+          <li class="menu-item-area active">
+            <i class="my-icon icon-msz icon-write-fat"></i>
+            <div class="dcp-pop pop-float">
+              <p>近期笔记</p>
+            </div>
+          </li>
+          <li class="menu-item-area">
+            <i class="my-icon icon-msz icon-search"></i>
+            <div class="dcp-pop pop-float">
+              <input type="text" placeholder="搜索范围 个人笔记">
+            </div>
+          </li>
+          <li class="menu-item-area">
+            <i class="my-icon icon-msz icon-share-fat"></i>
+            <div class="dcp-pop pop-float">
+              <p>我的分享</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <section class="pseronal-tree">
+    <div class="psersion-tree-box">
+      <div class="toolbar header-toolbar">
+        <div class="psersion-title">近期笔记</div>
+        <div class="persion-right">
+          <div class="icon-group">
+            <i class="my-icon icon-msz icon-sort-modify"></i>
+            <i class="my-icon icon-angle-down"></i>
+          </div>
+          <button class="new-btn">
+            + 新建笔记
+          </button>
+        </div>
+      </div>
+      <div class="content">
+        <ul>
+          <li class="note-list-item focus">
+            <div class="doclist-noteinfo">
+              <h4 class="title">
+                <i class="my-icon icon-doc"></i>
+                测是标题
+              </h4>
+            </div>
+            <div class="abstract">
+              <p class="abstract_text text-ellipsis">
+                测设反审反审得分水电费
+              </p>
+            </div>
+            <div class="time-info">
+              <span class="time">2018-07-23</span>
+              <span class="owner">602165057@qq.com</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <section class="main-section">
+    <div class="toolbar header-toolbar clear">
+      <button class="edit-btn">
+        编辑
+      </button>
+      <div class="docTools">
+        <ul>
+          <li>
+            <i class="my-icon icon-share" title="分享"></i>
+          </li>
+          <li>
+            <i class="my-icon icon-fulls" title="在新窗口打开"></i>
+          </li>
+          <li>
+            <i class="my-icon icon-info-circle" title="笔记信息"></i>
+          </li>
+          <li>
+            <i class="my-icon icon-clock" title="历史版本"></i>
+          </li>
+          <li>
+            <i class="my-icon icon-trash" title="删除"></i>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="main-box">
+      <div class="notetitle-ctn">
+        <h2>测试文章标题</h2>
+        <div class="icongroup">
+          <div class="icon-item">
+            <i class="iconfont icon-zan"></i>
+            <span class="cmt-count">(0)</span>
+          </div>
+          <div class="icon-item">
+            <i class="iconfont icon-homeiconcomment"></i>
+            <span class="cmt-count">(0)</span>
+          </div>
+        </div>
+      </div>
+      <div class="noteaddon-ctn">
+        <div class="noteaddon-item">
+          <span class="item-title">位置 :</span>
+          <div class="item-contetn">
+            <div class="item-menu">/我的笔记/</div>
+          </div>
+        </div>
+        <div class="noteaddon-item">
+          <span class="item-title">标签 :</span>
+          <div class="item-contetn">
+            <div class="">还没有标签哦</div>
+          </div>
+        </div>
+        <div class="noteaddon-item">
+          <span class="item-title">附件 :</span>
+          <div class="item-contetn active">
+            <i class="my-icon icon-add-circle"></i>
+            <div class="fj-dv">还没有附件哦</div>
+          </div>
+        </div>
+      </div>
+      <div class="wiz-document-toolbar">
+        <!-- 编辑器部分 -->
+        <ngx-neditor [(ngModel)]="content" #neditor [config]="config"></ngx-neditor>
+      </div>
+      <div class="notecontent-layer">
+        <!-- 文章内容部分 -->
+      </div>
+    </div>
+  </section>
+</div>

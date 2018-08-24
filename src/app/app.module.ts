@@ -1,12 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxNeditorModule } from '@notadd/ngx-neditor';
 
 import { AppComponent } from './app.component';
 import { FullLayoutComponent } from './containers/full-layout/full-layout.component';
 import { SimpleLayoutComponent } from './containers/simple-layout/simple-layout.component';
 import { NewsComponent } from './views/news/news.component';
 import { HeaderComponent } from './components/header/header.component';
+import { CointerComponent } from './views/cointer/cointer.component';
 
 const appRoutes = [
   { path: '', redirectTo: 'full', pathMatch: 'full' }, //路径为空
@@ -18,6 +22,11 @@ const appRoutes = [
         path: 'news',
         component: NewsComponent,
         name: '消息中心'
+      },
+      {
+        path: 'cointer',
+        component: CointerComponent,
+        name: '主页'
       }
     ]
   },
@@ -29,11 +38,15 @@ const appRoutes = [
     FullLayoutComponent,
     SimpleLayoutComponent,
     NewsComponent,
+    CointerComponent,
     HeaderComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes),
+    NgxNeditorModule
   ],
   exports: [],
   providers: [],

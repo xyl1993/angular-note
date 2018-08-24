@@ -38,8 +38,87 @@ input:-webkit-autofill {
   box-shadow: 0 0 0px 1000px white inset;
   -webkit-box-shadow: 0 0 0px 1000px white inset;
 }
+app-cointer{
+  width: 100%;
+}
 .text-ellipsis{
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.my-icon{
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  background-image: url(assets/images/icon-grey.a11282ce.png);
+}
+.active .my-icon{
+  background-image: url(assets/images/icon-blue.d76c51c0.png);
+}
+.icon-msz{
+  width: 20px;
+  height: 20px;
+}
+.icon-write-fat{
+  background-position: -25px -225px;
+}
+.icon-to-right{
+  background-position: 0 0;
+}
+.icon-search{
+  background-position: 0 -275px;
+}
+.icon-share-fat{
+  background-position: -75px -225px;
+}
+.icon-sort-modify{
+  background-position: -100px -150px;
+}
+.icon-angle-down{
+  background-position: -50px 0;
+}
+.icon-doc{
+  background-position: -50px -125px;
+}
+.icon-share{
+  background-position: -150px 0;
+}
+.icon-fulls{
+  background-position: -225px 0;
+}
+.icon-info-circle{
+  background-position: -150px -25px;
+}
+.icon-clock{
+  background-position: -175px 0;
+}
+.icon-trash{
+  background-position: -175px -25px;
+}
+.icon-add-circle{
+  background-position: -200px -50px;
+}
+
+
+/****************ueditor样式配置******************/
+.ueditor-textarea{
+  height: 100%;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  >.edui-notadd{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+  .edui-editor div{
+    width: auto !important;
+  }
+  #edui1_iframeholder{
+    flex: 1;
+    height: auto;
+  }
+}
+/****************ueditor样式配置end******************/
