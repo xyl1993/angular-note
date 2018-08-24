@@ -11,6 +11,7 @@ import { SimpleLayoutComponent } from './containers/simple-layout/simple-layout.
 import { NewsComponent } from './views/news/news.component';
 import { HeaderComponent } from './components/header/header.component';
 import { CointerComponent } from './views/cointer/cointer.component';
+import { LoginComponent } from './views/login/login.component';
 
 const appRoutes = [
   { path: '', redirectTo: 'full', pathMatch: 'full' }, //路径为空
@@ -30,6 +31,17 @@ const appRoutes = [
       }
     ]
   },
+  {
+    path: 'page',
+    component: SimpleLayoutComponent,
+    children: [
+      {
+        path: 'login',
+        component: LoginComponent,
+        name: '登录'
+      }
+    ]
+  },
 ];
 
 @NgModule({
@@ -39,6 +51,7 @@ const appRoutes = [
     SimpleLayoutComponent,
     NewsComponent,
     CointerComponent,
+    LoginComponent,
     HeaderComponent
   ],
   imports: [
