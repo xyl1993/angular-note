@@ -4,6 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxNeditorModule } from '@notadd/ngx-neditor';
+import { HttpModule } from '@angular/http';
+import { ApiService } from './utils/api';
+import { LoginService } from './views/login/login.service';
 
 import { AppComponent } from './app.component';
 import { FullLayoutComponent } from './containers/full-layout/full-layout.component';
@@ -14,7 +17,7 @@ import { CointerComponent } from './views/cointer/cointer.component';
 import { LoginComponent } from './views/login/login.component';
 
 const appRoutes = [
-  { path: '', redirectTo: 'full', pathMatch: 'full' }, //路径为空
+  { path: '', redirectTo: 'full/cointer', pathMatch: 'full' }, //路径为空
   {
     path: 'full',
     component: FullLayoutComponent,
@@ -55,6 +58,7 @@ const appRoutes = [
     HeaderComponent
   ],
   imports: [
+    HttpModule,
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,
@@ -62,7 +66,10 @@ const appRoutes = [
     NgxNeditorModule
   ],
   exports: [],
-  providers: [],
+  providers: [
+    ApiService,
+    LoginService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

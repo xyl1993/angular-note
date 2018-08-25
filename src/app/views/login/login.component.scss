@@ -17,6 +17,7 @@ header{
 }
 .login-cointer{
   padding-top: 61px;
+  background: #fff;
 }
 .swapper{
   width: 310px;
@@ -39,6 +40,9 @@ h2{
   .form-control{
     margin: 2em 0;
     margin-bottom: 1.5em;
+    &:last-of-type{
+      margin-bottom: 0;
+    }
   }
   input{
     width: 100%;
@@ -51,23 +55,103 @@ h2{
     height: 40px;
     width: 100%;
     font-size: 16px;
-    min-width: 4em;
     padding: 0 1em;
-    margin-right: .5em;
     margin-bottom: 1em;
     line-height: 2.2;
-    color: #333;
-    text-decoration: none;
+    color: #fff;
     cursor: pointer;
     border-width: 1px;
     border-style: solid;
-    border-color: #ccc;
-    background-color: #fff;
+    border-color: #2a64ca;
+    background-color: #448aff;
     &.disabled{
       color: #666;
       border-color: #ccc;
       cursor: default;
-      background-color: #ddd;
+      background-color: #ddd !important;
     }
+    &:hover{
+      background-color: #3777e4;
+    }
+  }
+}
+.sub-tools{
+  text-align: left;
+  input{
+    vertical-align: middle;
+    margin-right: 5px;
+    cursor: pointer;
+  }
+  label{
+    vertical-align: middle;
+    display: inline;
+    cursor: pointer;
+  }
+  a{
+    cursor: pointer;
+    vertical-align: middle;
+    float: right;
+    color: #448aff;
+  }
+  &:after{
+    clear: both;
+    content: '';
+    display: table;
+  }
+}
+.split-title{
+  margin-top: 4em;
+  position: relative;
+  margin-bottom: 3em;
+  text-align: center;
+  hr{
+    position: absolute;
+    top: 9px;
+    width: 100%;
+    height: 1px;
+    z-index: 0;
+    border: 0;
+    background-color: #e9e9e9;
+  }
+  .openid-text{
+    position: relative;
+    background-color: #fff;
+    color: #ccc;
+    display: inline-block;
+    margin: 0;
+    padding: 0 1em;
+  }
+}
+.third-icon{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  .iconfont{
+    font-size: 36px;
+    cursor: pointer;
+  }
+  .icon-weixin{
+    color: #56D648;
+  }
+  .icon-qq-copy{
+    color:#60B9E1;
+  }
+  .icon-github{
+    // color:#fff;
+  }
+}
+.other-etic{
+  text-align: center;
+  padding: 40px 0 10px 0;
+  label{
+    display: inline;
+    vertical-align: middle;
+  }
+  a{
+    display: inline;
+    cursor: pointer;
+    vertical-align: middle;
+    color: #448aff;
   }
 }

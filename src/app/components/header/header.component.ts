@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
 import {
   trigger,
   state,
@@ -34,7 +35,9 @@ export class HeaderComponent implements OnInit {
 
   newsInfoList = [];
 
-  constructor() { }
+  constructor(
+    public router: Router
+  ) { }
 
   ngOnInit() {
   }
@@ -51,5 +54,9 @@ export class HeaderComponent implements OnInit {
 
   newsClick(index) {
     this.infoStatusObject.index = index;
+  }
+
+  loginOut(){
+    this.router.navigateByUrl('/page/login');
   }
 }
