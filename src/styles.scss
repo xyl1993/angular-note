@@ -122,3 +122,16 @@ app-cointer{
   }
 }
 /****************ueditor样式配置end******************/
+/***********ng 标签插件设置**********/
+.ng2-tag-input{
+  padding-bottom: 0;
+  margin-bottom: 10px;
+}
+tag{
+  height: 30px;
+  line-height: 30px;
+  padding: .04rem .45rem;
+}
+.ng2-tag-input{
+  padding-bottom: 0px;
+}

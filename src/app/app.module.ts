@@ -5,9 +5,25 @@ import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxNeditorModule } from '@notadd/ngx-neditor';
 import { HttpModule } from '@angular/http';
+/**
+ * 插件 start
+ */
+import { TagInputModule } from 'ngx-chips';
+import {ToastModule} from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+/**
+ * 插件 end
+ */
+/**
+ * service start
+ */
 import { ApiService } from './utils/api';
 import { LoginService } from './views/login/login.service';
-
+import { CointerService } from './views/cointer/cointer.service';
+/**
+ * service end
+ */
+//组件 start
 import { AppComponent } from './app.component';
 import { FullLayoutComponent } from './containers/full-layout/full-layout.component';
 import { SimpleLayoutComponent } from './containers/simple-layout/simple-layout.component';
@@ -15,7 +31,7 @@ import { NewsComponent } from './views/news/news.component';
 import { HeaderComponent } from './components/header/header.component';
 import { CointerComponent } from './views/cointer/cointer.component';
 import { LoginComponent } from './views/login/login.component';
-
+//组件end
 const appRoutes = [
   { path: '', redirectTo: 'full/cointer', pathMatch: 'full' }, //路径为空
   {
@@ -63,12 +79,16 @@ const appRoutes = [
     FormsModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes),
-    NgxNeditorModule
+    NgxNeditorModule,
+    TagInputModule,
+    ToastModule
   ],
   exports: [],
   providers: [
     ApiService,
-    LoginService
+    LoginService,
+    CointerService,
+    MessageService
   ],
   bootstrap: [AppComponent]
 })

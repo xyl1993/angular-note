@@ -17,6 +17,7 @@
       </div>
       <div class="form-control">
         <div class="col">
+          <span class="error" *ngIf="errMessage">{{errMessage}}</span>
           <button class="btn" [ngClass]="{'disabled':loginDisabled}" (click)="submit()">{{formStatus===1?'登录':'注册'}}</button>
         </div>
       </div>

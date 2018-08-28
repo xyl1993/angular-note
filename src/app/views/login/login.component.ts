@@ -9,7 +9,7 @@ import { LoginService } from './login.service';
 export class LoginComponent implements OnInit {
 
   formStatus = 1;  //1登录 2注册
-
+  errMessage="";
   loginDisabled = true;
   formModel = {
     email: '',
@@ -27,22 +27,26 @@ export class LoginComponent implements OnInit {
   submit() {
     //登录
     if (!this.loginDisabled) {
-      let data = this.formModel;
       if (this.formStatus === 1) {
         // this.router.navigateByUrl('/full/cointer');
         this.service
-          .dtlogin(data)
+          .dtlogin(this.formModel)
           .subscribe(
-            data => {
-              localStorage.setItem('token',data.token)
+            res => {
+              let {data,code,message} = res;
+              this.errMessage = message;
+              if(code === 200){
+                localStorage.setItem("noteToken",data);
+                this.router.navigateByUrl('/full/cointer');
+              }
             },
             error => console.error(error)
           );
       } else {
         this.service
-          .regist(data)
+          .regist(this.formModel)
           .subscribe(
-            data => console.log(data),
+            res => console.log(res),
             error => console.error(error)
           );
       }

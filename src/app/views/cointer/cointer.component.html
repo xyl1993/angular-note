@@ -71,8 +71,8 @@
   </section>
   <section class="main-section">
     <div class="toolbar header-toolbar clear">
-      <button class="edit-btn">
-        编辑
+      <button class="edit-btn" (click)="editBtnClick()">
+        {{editStatus?'保存':'编辑'}}
       </button>
       <div class="docTools">
         <ul>
@@ -96,7 +96,10 @@
     </div>
     <div class="main-box">
       <div class="notetitle-ctn">
-        <h2>测试文章标题</h2>
+        <h2 *ngIf="!editStatus">
+          <span>{{formModel.title}}</span>
+        </h2>
+        <input class="title-input" *ngIf="editStatus" type="text" [(ngModel)]="formModel.title">
         <div class="icongroup">
           <div class="icon-item">
             <i class="iconfont icon-zan"></i>
@@ -116,9 +119,11 @@
           </div>
         </div>
         <div class="noteaddon-item">
-          <span class="item-title">标签 :</span>
-          <div class="item-contetn">
-            <div class="">还没有标签哦</div>
+          <span class="item-title title-tag">标签 :</span>
+          <div class="item-contetn item-tag">
+            <div class="">
+              <tag-input [(ngModel)]='formModel.tag' [maxItems]='10' [modelAsStrings]='true'></tag-input>
+            </div>
           </div>
         </div>
         <div class="noteaddon-item">
@@ -131,7 +136,7 @@
       </div>
       <div class="wiz-document-toolbar">
         <!-- 编辑器部分 -->
-        <ngx-neditor [(ngModel)]="content" #neditor [config]="config"></ngx-neditor>
+        <ngx-neditor [(ngModel)]="formModel.content" #neditor [config]="config"></ngx-neditor>
       </div>
       <div class="notecontent-layer">
         <!-- 文章内容部分 -->

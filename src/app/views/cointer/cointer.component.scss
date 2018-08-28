@@ -246,6 +246,15 @@ section{
     white-space: nowrap;
     text-overflow: ellipsis;
   }
+  .title-input{
+    flex: 1;
+    font-size: 20px;
+    font-weight: 400;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    border: none;
+  }
   .icongroup{
     display: flex;
     align-items: center;
@@ -277,6 +286,9 @@ section{
   color: #999;
   .item-title{
     position: absolute;
+    &.title-tag{
+      top: 17px;
+    }
   }
   .item-menu{
     color: #448aff;
@@ -284,6 +296,9 @@ section{
   }
   .item-contetn{
     padding-left: 37px;
+    &.item-tag{
+      margin-top: -7px;
+    }
   }
   .icon-add-circle{
     float: left;

@@ -19,7 +19,7 @@ export class ApiService {
 
   private createAuthorizationHeader(url: string) {
     if (!this.allowUrls.test(url)) {
-      let token = localStorage.getItem('token');
+      let token = localStorage.getItem('noteToken');
       if (this.noJsonTypeUrls.test(url)) {
         return {
           "token": token

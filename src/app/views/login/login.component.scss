@@ -43,6 +43,14 @@ h2{
     &:last-of-type{
       margin-bottom: 0;
     }
+    .col{
+      position: relative;
+      .error{
+        position: absolute;
+        top: -22px;
+        color: rgba(232, 53, 53, 0);
+      }
+    }
   }
   input{
     width: 100%;
