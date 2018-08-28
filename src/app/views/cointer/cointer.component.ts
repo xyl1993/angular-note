@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ueConfig } from '../../global/ueditor.config';
+import { Router } from '@angular/router';
 import { CointerService } from './cointer.service';
 import { MessageService } from 'primeng/api';
 import { statusValid } from '../../utils/status-valid';
@@ -22,17 +23,29 @@ export class CointerComponent implements OnInit {
     file: ''
   }
   constructor(
-    public service: CointerService,
+    private router: Router,
+    private service: CointerService,
     private messageService: MessageService
   ) { }
 
   ngOnInit() {
+    this.selNoteList();
   }
   smilClick() {
     this.smileStatus = !this.smileStatus;
   }
+  selNoteList() {
+    let pdata = {};
+    this.service.selNoteList(pdata).subscribe(
+      res => {
+        let { data, code, message } = res;
+        if (statusValid(this, code, message)) {
+          
+        }
+      }
+    );
+  }
   editBtnClick() {
-
     if (this.editStatus) {
       //编辑状态下保存文章
       let pdata = JSON.stringify(this.formModel);
