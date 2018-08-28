@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { ueConfig } from '../../global/ueditor.config.js';
+import { ueConfig } from '../../global/ueditor.config';
 import { CointerService } from './cointer.service';
 import { MessageService } from 'primeng/api';
+import { statusValid } from '../../utils/status-valid';
 @Component({
   selector: 'app-cointer',
   templateUrl: './cointer.component.html',
   styleUrls: ['./cointer.component.scss'],
-  providers: [MessageService]
+  providers: [MessageService, CointerService]
 })
 export class CointerComponent implements OnInit {
 
@@ -31,21 +32,18 @@ export class CointerComponent implements OnInit {
     this.smileStatus = !this.smileStatus;
   }
   editBtnClick() {
+
     if (this.editStatus) {
       //编辑状态下保存文章
       let pdata = JSON.stringify(this.formModel);
-      this.service
-        .addNote(pdata)
-        .subscribe(
-          res => {
-            let { data, code, message } = res;
-            this.messageService.add({ severity: 'success', summary: 'Service Message', detail: 'Via MessageService' });
-            if (code === 200) {
-
-            }
-          },
-          error => console.error(error)
-        );
+      this.service.addNote(pdata).subscribe(
+        res => {
+          let { data, code, message } = res;
+          if (statusValid(this, code, message)) {
+            console.log(123);
+          }
+        }
+      );
     } else {
       this.editStatus = true;
     }

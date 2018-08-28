@@ -4,12 +4,13 @@ import { LoginService } from './login.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  providers: [LoginService]
 })
 export class LoginComponent implements OnInit {
 
   formStatus = 1;  //1登录 2注册
-  errMessage="";
+  errMessage = "";
   loginDisabled = true;
   formModel = {
     email: '',
@@ -33,10 +34,10 @@ export class LoginComponent implements OnInit {
           .dtlogin(this.formModel)
           .subscribe(
             res => {
-              let {data,code,message} = res;
+              let { data, code, message } = res;
               this.errMessage = message;
-              if(code === 200){
-                localStorage.setItem("noteToken",data);
+              if (code === 200) {
+                localStorage.setItem("noteToken", data);
                 this.router.navigateByUrl('/full/cointer');
               }
             },

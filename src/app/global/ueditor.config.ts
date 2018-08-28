@@ -93,7 +93,6 @@ export const ueConfig = {
       // 'charts', // 图表
     ]
   ],
-  autoHeightEnabled: true,
   autoFloatEnabled: true,
   initialFrameWidth :'100%',
   initialFrameHeight :'100%',

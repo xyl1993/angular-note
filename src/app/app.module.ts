@@ -9,8 +9,7 @@ import { HttpModule } from '@angular/http';
  * 插件 start
  */
 import { TagInputModule } from 'ngx-chips';
-import {ToastModule} from 'primeng/toast';
-import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 /**
  * 插件 end
  */
@@ -18,8 +17,6 @@ import { MessageService } from 'primeng/api';
  * service start
  */
 import { ApiService } from './utils/api';
-import { LoginService } from './views/login/login.service';
-import { CointerService } from './views/cointer/cointer.service';
 /**
  * service end
  */
@@ -85,10 +82,7 @@ const appRoutes = [
   ],
   exports: [],
   providers: [
-    ApiService,
-    LoginService,
-    CointerService,
-    MessageService
+    ApiService
   ],
   bootstrap: [AppComponent]
 })
