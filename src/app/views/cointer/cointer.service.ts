@@ -16,4 +16,13 @@ export class CointerService {
       .post(`note/selNoteList`, data)
   }
 
+  public editNote(data): any {
+    return this.apiService
+      .post(`note/editNote`, data)
+  }
+  
+  public selNoteDetail(data): any {
+    return this.apiService
+      .post(`note/selNoteDetail`, data)
+  }
 }

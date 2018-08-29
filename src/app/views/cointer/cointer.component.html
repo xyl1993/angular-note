@@ -42,28 +42,29 @@
             <i class="my-icon icon-msz icon-sort-modify"></i>
             <i class="my-icon icon-angle-down"></i>
           </div>
-          <button class="new-btn">
+          <button class="new-btn" (click)="createNewNote()">
             + 新建笔记
           </button>
         </div>
       </div>
       <div class="content">
+        <p *ngIf="noteList.length===0" class="tip-empty">还没有创建任何笔记哦</p>
         <ul>
-          <li class="note-list-item focus">
+          <li (click)="selNoteItem(item,index)" class="note-list-item" [ngClass]="{'focus':selNoteInfo.index==index}" *ngFor="let item of noteList;index as index;">
             <div class="doclist-noteinfo">
               <h4 class="title">
                 <i class="my-icon icon-doc"></i>
-                测是标题
+                {{item.title}}
               </h4>
             </div>
             <div class="abstract">
               <p class="abstract_text text-ellipsis">
-                测设反审反审得分水电费
+                {{item.content}}
               </p>
             </div>
             <div class="time-info">
-              <span class="time">2018-07-23</span>
-              <span class="owner">602165057@qq.com</span>
+              <span class="time">{{item.create_time | dateFormat:'YYYY-MM-DD HH:mm'}}</span>
+              <!-- <span class="owner">602165057@qq.com</span> -->
             </div>
           </li>
         </ul>
@@ -72,8 +73,11 @@
   </section>
   <section class="main-section">
     <div class="toolbar header-toolbar clear">
-      <button class="edit-btn" (click)="editBtnClick()">
-        {{editStatus?'保存':'编辑'}}
+      <button class="edit-btn" (click)="editBtnClick(1)" *ngIf="!editStatus">
+        编辑
+      </button>
+      <button class="save-edit-btn" (click)="editBtnClick(2)" *ngIf="editStatus">
+        保存
       </button>
       <div class="docTools">
         <ul>
@@ -95,12 +99,12 @@
         </ul>
       </div>
     </div>
-    <div class="main-box">
+    <div class="main-box" *ngIf="noteList.length!==0">
       <div class="notetitle-ctn">
         <h2 *ngIf="!editStatus">
-          <span>{{formModel.title}}</span>
+          <span>{{primitiveNoteInfo.title}}</span>
         </h2>
-        <input class="title-input" *ngIf="editStatus" type="text" [(ngModel)]="formModel.title">
+        <input class="title-input" *ngIf="editStatus" type="text" [(ngModel)]="primitiveNoteInfo.title">
         <div class="icongroup">
           <div class="icon-item">
             <i class="iconfont icon-zan"></i>
@@ -123,7 +127,7 @@
           <span class="item-title title-tag">标签 :</span>
           <div class="item-contetn item-tag">
             <div class="">
-              <tag-input [(ngModel)]='formModel.tag' [maxItems]='10' [modelAsStrings]='true'></tag-input>
+              <tag-input [(ngModel)]='primitiveNoteInfo.tag' [maxItems]='10' [modelAsStrings]='true'></tag-input>
             </div>
           </div>
         </div>
@@ -137,11 +141,15 @@
       </div>
       <div class="wiz-document-toolbar">
         <!-- 编辑器部分 -->
-        <ngx-neditor [(ngModel)]="formModel.content" #neditor [config]="config"></ngx-neditor>
+        <ngx-neditor [(ngModel)]="primitiveNoteInfo.content" #neditor [config]="ueConfig"></ngx-neditor>
       </div>
       <div class="notecontent-layer">
         <!-- 文章内容部分 -->
       </div>
+    </div>
+    <div class="main-box" *ngIf="noteList.length===0">
+      <img class="note_gray" src="../../../assets/images/note_gray.png" alt="">
+      <span class="note_gray_text">还没有创建任何笔记哦</span>
     </div>
   </section>
 </div>

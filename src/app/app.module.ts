@@ -28,6 +28,7 @@ import { NewsComponent } from './views/news/news.component';
 import { HeaderComponent } from './components/header/header.component';
 import { CointerComponent } from './views/cointer/cointer.component';
 import { LoginComponent } from './views/login/login.component';
+import { DateFormatPipe } from './directives/dateFormat.pipe';
 //组件end
 const appRoutes = [
   { path: '', redirectTo: 'full/cointer', pathMatch: 'full' }, //路径为空
@@ -68,7 +69,8 @@ const appRoutes = [
     NewsComponent,
     CointerComponent,
     LoginComponent,
-    HeaderComponent
+    HeaderComponent,
+    DateFormatPipe
   ],
   imports: [
     HttpModule,

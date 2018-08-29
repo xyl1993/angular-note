@@ -1,7 +1,7 @@
 export const ueConfig = {
   toolbars: [
     [
-      'anchor', //锚点
+      // 'anchor', //锚点
       'undo', //撤销
       'redo', //重做
       'bold', //加粗

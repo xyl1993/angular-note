@@ -13,6 +13,16 @@
   height: 32px;
   margin-bottom: 5px;
 }
+.note_gray{
+  padding-top: 80px;
+}
+.tip-empty{
+  color: #d4d4d4;
+  margin-top: 2em;
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: 700;
+}
 section{
   position: relative;
   padding: 16px 8px 8px 8px;
@@ -115,7 +125,6 @@ section{
     color: #555;
     float: left;
   }
-
   .icon-group{
     padding-right: 10px;
     position: relative;
@@ -139,6 +148,7 @@ section{
     padding: 0 14px;
     font-size: 14px;
     cursor: pointer;
+    border: 1px solid #2a64ca;
     &:hover{
       background-color: #3777e4;
     }
@@ -207,6 +217,18 @@ section{
   display: flex;
   flex-direction: column;
   border: 1px solid #ccc;
+  background: #fff;
+}
+.note_gray{
+  width: 120px;
+  padding-top: 120px;
+  margin: 0 auto;
+}
+.note_gray_text{
+  text-align: center;
+  font-size: 15px;
+  color: #d4d4d4;
+  padding-top: .75em;
 }
 .edit-btn{
   height: 32px;
@@ -317,4 +339,18 @@ section{
 .notecontent-layer{
   width: 100%;
   background: #fff;
+}
+.save-edit-btn{
+  color: #fff;
+  border-color: #2a64ca;
+  background-color: #3777e4;
+  border: none;
+  height: 32px;
+  padding: 0 14px;
+  font-size: 14px;
+  cursor: pointer;
+  border: 1px solid #2a64ca;
+  &:hover{
+    background-color: #3777e4;
+  }
 }
