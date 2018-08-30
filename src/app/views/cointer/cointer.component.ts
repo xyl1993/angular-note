@@ -18,9 +18,10 @@ export class CointerComponent implements OnInit {
     content: '',
     tag: [],
     create_time: '',
+    preview_content:'',
     file: ''
   };
-
+  public keyword = '';
   public selNoteInfo = {
     index: 0
   };  //文章列表选择索引值
@@ -44,7 +45,9 @@ export class CointerComponent implements OnInit {
    * 加载笔记列表
    */
   selNoteList() {
-    let pdata = {};
+    let pdata = {
+      keyword:this.keyword
+    };
     this.service.selNoteList(pdata).subscribe(
       res => {
         let { data, code, message } = res;
@@ -79,6 +82,7 @@ export class CointerComponent implements OnInit {
       res => {
         let { data, code, message } = res;
         if (statusValid(this, code, message)) {
+          console.log(data);
           this.primitiveNoteInfo = data;
         }
       }
@@ -92,10 +96,13 @@ export class CointerComponent implements OnInit {
       //点击编辑
       //编辑状态下保存文章
       let pdata = Object.assign(this.primitiveNoteInfo, {});
+      pdata.preview_content = this.primitiveNoteInfo.content?
+        this.primitiveNoteInfo.content.replace(/<[^>]*>/g, "").substring(0,31):'';
       this.service.editNote(pdata).subscribe(
         res => {
           let { data, code, message } = res;
           if (statusValid(this, code, message)) {
+            this.noteList[this.selNoteInfo.index] = pdata;
             this.messageService.add({ severity: 'success', summary: '提示', detail: '保存成功' });
             this.editStatus = false;
           }

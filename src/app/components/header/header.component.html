@@ -50,12 +50,12 @@
     </div>
     <div class="user-icon-cointer">
       <div class="user-icon" (click)="userClick()">
-        <img src="https://note.wiz.cn/as/user/avatar/1361ef97-bfdf-4dfe-8af1-ce96f8426773?default=true&_1535007844607" alt="">
+        <img src="{{userInfo.portrait}}" alt="">
       </div>
       <div class="pop-user-setting" *ngIf="userStatus">
         <ul>
           <li class="user-name-menu">
-            <span>zzdd</span>
+            <span>{{userInfo.nike_name}}</span>
             <div class="wiz-pay">购买 VIP</div>
           </li>
           <li class="item-content" (click)="loginOut()">

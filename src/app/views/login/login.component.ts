@@ -8,7 +8,7 @@ import { LoginService } from './login.service';
   providers: [LoginService]
 })
 export class LoginComponent implements OnInit {
-
+  submitStatus = false;
   formStatus = 1;  //1登录 2注册
   errMessage = "";
   loginDisabled = true;
@@ -22,43 +22,61 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.formKeyUp();
+    this.formKeyUp(this);
   }
-
+  entryClick(e) {
+    console.log(e);
+  }
   submit() {
-    //登录
-    if (!this.loginDisabled) {
-      if (this.formStatus === 1) {
-        // this.router.navigateByUrl('/full/cointer');
-        this.service
-          .dtlogin(this.formModel)
-          .subscribe(
-            res => {
-              let { data, code, message } = res;
-              this.errMessage = message;
-              if (code === 200) {
-                localStorage.setItem("noteToken", data);
-                this.router.navigateByUrl('/full/cointer');
+    if (!this.submitStatus) {
+      this.submitStatus = true;
+      //登录
+      if (!this.loginDisabled) {
+        if (this.formStatus === 1) {
+          this.service
+            .dtlogin(this.formModel)
+            .subscribe(
+              res => {
+                let { data, token, code, message } = res;
+                this.errMessage = message;
+                if (code === 200) {
+                  localStorage.setItem("noteToken", token);
+                  localStorage.setItem("noteUser", JSON.stringify(data));
+                  this.router.navigateByUrl('/full/cointer');
+                }
               }
-            },
-            error => console.error(error)
-          );
-      } else {
-        this.service
-          .regist(this.formModel)
-          .subscribe(
-            res => console.log(res),
-            error => console.error(error)
-          );
+            );
+        } else {
+          this.service
+            .regist(this.formModel)
+            .subscribe(
+              res => {
+                let { data, token, code, message } = res;
+                this.errMessage = message;
+                if (code === 200) {
+                  localStorage.setItem("noteToken", token);
+                  localStorage.setItem("noteUser", JSON.stringify(data));
+                  this.router.navigateByUrl('/full/cointer');
+                }
+              }
+            );
+        }
       }
+      setTimeout(()=>{
+        this.submitStatus = false;
+      },2000);
     }
   }
 
-  formKeyUp() {
-    if (this.formModel.email && this.formModel.password) {
-      this.loginDisabled = false;
-    } else {
-      this.loginDisabled = true;
+  formKeyUp(event) {
+    if(event && event.keyCode === 13){
+      this.submit();
+    }else{
+      if (this.formModel.email && this.formModel.password) {
+        this.loginDisabled = false;
+      } else {
+        this.loginDisabled = true;
+      }
     }
   }
 

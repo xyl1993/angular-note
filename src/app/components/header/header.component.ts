@@ -30,7 +30,10 @@ export class HeaderComponent implements OnInit {
     showStatus: false,  //是否显示弹窗
     index: 1           //近期消息
   }
-
+  userInfo = {
+    nike_name:'',
+    portrait:''
+  };
   userStatus = false;
 
   newsInfoList = [];
@@ -40,6 +43,7 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.userInfo = localStorage.getItem('noteUser')?JSON.parse(localStorage.getItem('noteUser')):{};
   }
 
   infoClick() {

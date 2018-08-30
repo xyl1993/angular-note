@@ -3,16 +3,16 @@
 </header>
 <div class="login-cointer">
   <div class="swapper">
-    <h2 class="login-tip">登录帐号</h2>
+    <h2 class="login-tip">{{formStatus===1?'登录账号':'注册账号'}}</h2>
     <div class="loginarea">
       <div class="form-control">
         <div class="col">
-          <input type="text" autocomplete="off" [(ngModel)]="formModel.email" placeholder="用户名" (keyup)="formKeyUp()">
+          <input type="text" autocomplete="off" [(ngModel)]="formModel.email" placeholder="用户名" (keyup)="formKeyUp($event)">
         </div>
       </div>
       <div class="form-control">
         <div class="col">
-          <input type="password" autocomplete="off" [(ngModel)]="formModel.password" placeholder="密码" (keyup)="formKeyUp()">
+          <input type="password" autocomplete="off" [(ngModel)]="formModel.password" placeholder="密码" (keyup)="formKeyUp($event)">
         </div>
       </div>
       <div class="form-control">
@@ -23,8 +23,8 @@
       </div>
     </div>
     <div class="form-control sub-tools">
-      <input type="checkbox" id="remember-me">
-      <label for="remember-me">两周内自动登录</label>
+      <!-- <input type="checkbox" id="remember-me">
+      <label for="remember-me">两周内自动登录</label> -->
       <a>忘记密码？</a>
     </div>
     <div class="split-title">

@@ -339,11 +339,13 @@ section{
 .notecontent-layer{
   width: 100%;
   background: #fff;
+  flex: 1;
+  padding: 12px 20px;
+  overflow: auto;
 }
 .save-edit-btn{
   color: #fff;
-  border-color: #2a64ca;
-  background-color: #3777e4;
+  background-color: #448aff;
   border: none;
   height: 32px;
   padding: 0 14px;
@@ -353,4 +355,7 @@ section{
   &:hover{
     background-color: #3777e4;
   }
+}
+.hidden{
+  display: none;
 }
