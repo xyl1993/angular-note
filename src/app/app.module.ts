@@ -28,8 +28,8 @@ import { NewsComponent } from './views/news/news.component';
 import { HeaderComponent } from './components/header/header.component';
 import { CointerComponent } from './views/cointer/cointer.component';
 import { LoginComponent } from './views/login/login.component';
-import { DateFormatPipe } from './directives/dateFormat.pipe';
-import { HtmlPipePipe } from './directives/html-pipe.pipe';
+import { DateFormatPipe } from './filters/dateFormat.pipe';
+import { HtmlPipePipe } from './filters/html-pipe.pipe';
 //组件end
 const appRoutes = [
   { path: '', redirectTo: 'full/cointer', pathMatch: 'full' }, //路径为空
