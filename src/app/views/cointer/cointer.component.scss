@@ -35,7 +35,7 @@ section{
     background-color: #fff;
     overflow: hidden;
     border: 1px solid #B8BCC4;
-    
+    overflow: auto;
     box-shadow: 0 0 3px rgba(184,188,196,.25);
   }
 }
@@ -185,9 +185,6 @@ section{
       line-height: 1.35;
       height: 48px;
       color: #8C8C8C;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 3;
     }
     .time-info{
       margin-top: 4px;

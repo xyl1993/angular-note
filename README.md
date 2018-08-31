@@ -1,5 +1,8 @@
 # AngularApp
 
+1、npm install
+2、npm start
+
 常用命令：
   angular-cli提供的常用命令
 
@@ -22,3 +25,5 @@
   ng g s my-new-service // 新建服务
 
 #ngx-neditor https://github.com/notadd/ngx-neditor
+#项目打包 
+ng build --prod --build-optimizer --aot
