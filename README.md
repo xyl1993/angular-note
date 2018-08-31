@@ -1,7 +1,7 @@
 # AngularApp
-
-1、npm install
-2、npm start
+1、npm install -g @angular/cli
+2、npm install
+3、npm start
 
 常用命令：
   angular-cli提供的常用命令

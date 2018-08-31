@@ -339,6 +339,10 @@ section{
   flex: 1;
   padding: 12px 20px;
   overflow: auto;
+  img{
+    max-width: 100% !important;
+    height: auto;
+  }
 }
 .save-edit-btn{
   color: #fff;

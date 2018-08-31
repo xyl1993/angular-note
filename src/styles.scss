@@ -146,3 +146,10 @@ tag{
 .ng2-tag-input{
   padding-bottom: 0px;
 }
+//文章页的加载图片样式，必须要写在这里才行
+.notecontent-layer{
+  img{
+    max-width: 100% !important;
+    height: auto;
+  }
+}
