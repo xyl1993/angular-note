@@ -27,3 +27,4 @@
 #ngx-neditor https://github.com/notadd/ngx-neditor
 #项目打包 
 ng build --prod --build-optimizer --aot
+将打包后dist/angular-app/下的文件复制到server端的public中
