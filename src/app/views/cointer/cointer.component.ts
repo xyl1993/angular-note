@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 import { CointerService } from './cointer.service';
 import { MessageService } from 'primeng/api';
 import { statusValid } from '../../utils/status-valid';
+
+
+
 @Component({
   selector: 'app-cointer',
   templateUrl: './cointer.component.html',
@@ -11,7 +14,7 @@ import { statusValid } from '../../utils/status-valid';
   providers: [MessageService, CointerService]
 })
 export class CointerComponent implements OnInit {
-
+  
   private primitiveNoteInfo = {
     _id:'',
     title: '',
@@ -36,6 +39,7 @@ export class CointerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    
     this.selNoteList();
   }
   smilClick() {

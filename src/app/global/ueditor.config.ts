@@ -1,4 +1,16 @@
+import { qiniuDomain } from './base.config';
+
 export const ueConfig = {
+  serverUrl: '',
+  scrawlUrlPrefix: qiniuDomain,
+  videoUrlPrefix: qiniuDomain,
+  fileUrlPrefix: qiniuDomain,
+  imageUrlPrefix: qiniuDomain,
+  xssFilterRules: true,
+  //input xss过滤
+  inputXssFilter: true,
+  //output xss过滤
+  outputXssFilter: true,
   toolbars: [
     [
       // 'anchor', //锚点
@@ -6,7 +18,7 @@ export const ueConfig = {
       'redo', //重做
       'bold', //加粗
       'indent', //首行缩进
-      'snapscreen', //截图
+      // 'snapscreen', //截图
       'italic', //斜体
       'underline', //下划线
       'strikethrough', //删除线
@@ -14,7 +26,7 @@ export const ueConfig = {
       // 'fontborder', //字符边框
       // 'superscript', //上标
       // 'formatmatch', //格式刷
-      'source', //源代码
+      // 'source', //源代码
       // 'blockquote', //引用
       'pasteplain', //纯文本粘贴模式
       // 'selectall', //全选
@@ -44,7 +56,7 @@ export const ueConfig = {
       'fontfamily', //字体
       'fontsize', //字号
       'paragraph', //段落格式
-      'simpleupload', //单图上传
+      // 'simpleupload', //单图上传
       'insertimage', //多图上传
       // 'edittable', //表格属性
       // 'edittd', //单元格属性
@@ -94,7 +106,7 @@ export const ueConfig = {
     ]
   ],
   autoFloatEnabled: true,
-  initialFrameWidth :'100%',
-  initialFrameHeight :'100%',
-  autoHeightEnabled :false
+  initialFrameWidth: '100%',
+  initialFrameHeight: '100%',
+  autoHeightEnabled: false
 } 
