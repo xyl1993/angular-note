@@ -5,14 +5,15 @@
       <div class="toolbar">
         <ul class="menu-nail">
           <div class="icon-right-div" (click)="smilClick()">
-            <i class="my-icon icon-to-right"></i>
+            <i *ngIf="!smileStatus" class="my-icon icon-to-right"></i>
+            <i *ngIf="smileStatus" class="my-icon icon-to-left"></i>
           </div>
         </ul>
       </div>
       <div class="content">
         <ul>
-          <li class="menu-item-area active">
-            <i class="my-icon icon-msz icon-write-fat"></i>
+          <li class="menu-item-area" [ngClass]="{'active':seleventIndex===1}" (click)="selNoteList(1)">
+            <i class="my-icon icon-msz icon-write-fat" ></i>
             <div class="dcp-pop pop-float">
               <p>近期笔记</p>
             </div>
@@ -20,13 +21,19 @@
           <li class="menu-item-area">
             <i class="my-icon icon-msz icon-search"></i>
             <div class="dcp-pop pop-float">
-              <input  (keydown.enter)="selNoteList()" [(ngModel)]="keyword" type="text" placeholder="搜索范围 个人笔记">
+              <input  (keydown.enter)="selNoteList(-1)" [(ngModel)]="keyword" type="text" placeholder="搜索范围 个人笔记">
             </div>
           </li>
           <li class="menu-item-area">
             <i class="my-icon icon-msz icon-share-fat"></i>
             <div class="dcp-pop pop-float">
               <p>我的分享</p>
+            </div>
+          </li>
+          <li class="menu-item-area" [ngClass]="{'active':seleventIndex===4}" (click)="selNoteList(4)">
+            <i class="iconfont icon-huishouzhan"></i>
+            <div class="dcp-pop pop-float">
+              <p>回收站</p>
             </div>
           </li>
         </ul>
@@ -84,7 +91,7 @@
             <i class="my-icon icon-share" title="分享"></i>
           </li>
           <li>
-            <i class="my-icon icon-fulls" title="在新窗口打开"></i>
+            <i class="my-icon icon-fulls" (click)="sharNewWindows()" title="在新窗口打开"></i>
           </li>
           <li>
             <i class="my-icon icon-info-circle" title="笔记信息"></i>

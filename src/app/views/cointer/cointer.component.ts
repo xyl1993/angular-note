@@ -4,26 +4,28 @@ import { Router } from '@angular/router';
 import { CointerService } from './cointer.service';
 import { MessageService } from 'primeng/api';
 import { statusValid } from '../../utils/status-valid';
-
+import { window } from 'rxjs/operators';
+import {WindowRef} from '../../global/windowRef.service';
 
 
 @Component({
   selector: 'app-cointer',
   templateUrl: './cointer.component.html',
   styleUrls: ['./cointer.component.scss'],
-  providers: [MessageService, CointerService]
+  providers: [MessageService, CointerService,WindowRef]
 })
 export class CointerComponent implements OnInit {
-  
+
   private primitiveNoteInfo = {
-    _id:'',
+    _id: '',
     title: '',
     content: '',
     tag: [],
     create_time: '',
-    preview_content:'',
+    preview_content: '',
     file: ''
   };
+  public seleventIndex = 1; //默认加载最近日记
   public keyword = '';
   public selNoteInfo = {
     index: 0
@@ -32,15 +34,18 @@ export class CointerComponent implements OnInit {
   public ueConfig = ueConfig;  //editor配置
   public editStatus = false;    //文章是新建还是修改
   public noteList = [];     //标题列表list
+  nativeWindow: any;
   constructor(
     private router: Router,
     private service: CointerService,
-    private messageService: MessageService
-  ) { }
+    private messageService: MessageService,
+    private windowRef: WindowRef
+  ) { 
+    this.nativeWindow = windowRef.getNativeWindow();
+  }
 
   ngOnInit() {
-    
-    this.selNoteList();
+    this.selNoteList(-1);
   }
   smilClick() {
     this.smileStatus = !this.smileStatus;
@@ -48,23 +53,27 @@ export class CointerComponent implements OnInit {
   /**
    * 加载笔记列表
    */
-  selNoteList() {
-    let pdata = {
-      keyword:this.keyword
-    };
-    this.service.selNoteList(pdata).subscribe(
-      res => {
-        let { data, code, message } = res;
-        if (statusValid(this, code, message)) {
-          this.noteList = data;
-          if (data.length > 0) {
-            //如果是首次加载 获取对应的详情
-            this.selNoteInfo.index = 0;
-            this.selNoteDetail(data[0]._id);
+  selNoteList(seleventIndex?) {
+    if (seleventIndex !== this.seleventIndex) {
+      this.seleventIndex = seleventIndex === -1 ? 1 : seleventIndex;
+      let pdata = {
+        status: this.seleventIndex === 4 ? 0 : this.seleventIndex,
+        keyword: this.keyword
+      };
+      this.service.selNoteList(pdata).subscribe(
+        res => {
+          let { data, code, message } = res;
+          if (statusValid(this, code, message)) {
+            this.noteList = data;
+            if (data.length > 0) {
+              //如果是首次加载 获取对应的详情
+              this.selNoteInfo.index = 0;
+              this.selNoteDetail(data[0]._id);
+            }
           }
         }
-      }
-    );
+      );
+    }
   }
   /**
    * 笔记列表点击事件
@@ -82,7 +91,7 @@ export class CointerComponent implements OnInit {
    * @param _id 查看详情
    */
   selNoteDetail(_id) {
-    this.service.selNoteDetail({_id:_id}).subscribe(
+    this.service.selNoteDetail({ _id: _id }).subscribe(
       res => {
         let { data, code, message } = res;
         if (statusValid(this, code, message)) {
@@ -96,12 +105,12 @@ export class CointerComponent implements OnInit {
    * 点击编辑按钮
    */
   editBtnClick(status) {
-    if (status===2) {
+    if (status === 2) {
       //点击编辑
       //编辑状态下保存文章
       let pdata = Object.assign(this.primitiveNoteInfo, {});
-      pdata.preview_content = this.primitiveNoteInfo.content?
-        this.primitiveNoteInfo.content.replace(/<[^>]*>/g, "").substring(0,31):'';
+      pdata.preview_content = this.primitiveNoteInfo.content ?
+        this.primitiveNoteInfo.content.replace(/<[^>]*>/g, "").substring(0, 31) : '';
       this.service.editNote(pdata).subscribe(
         res => {
           let { data, code, message } = res;
@@ -112,7 +121,7 @@ export class CointerComponent implements OnInit {
           }
         }
       );
-    }else{
+    } else {
       this.editStatus = true;
     }
   }
@@ -136,5 +145,11 @@ export class CointerComponent implements OnInit {
         }
       }
     );
+  }
+  /**
+   * 打开文章
+   */
+  sharNewWindows(){
+    this.nativeWindow.open('http://localhost:3001/article?_id=kLqwRldy');
   }
 }
