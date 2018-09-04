@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from './login.service';
+import { WindowRef } from '../../global/windowRef.service';
+import { apiConfig } from '../../global/apiConfig';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  providers: [LoginService]
+  providers: [LoginService, WindowRef]
 })
 export class LoginComponent implements OnInit {
   submitStatus = false;
@@ -16,10 +18,14 @@ export class LoginComponent implements OnInit {
     email: '',
     password: ''
   }
+  nativeWindow: any;
   constructor(
     public router: Router,
-    public service: LoginService
-  ) { }
+    public service: LoginService,
+    private windowRef: WindowRef,
+  ) {
+    this.nativeWindow = windowRef.getNativeWindow();
+  }
 
   ngOnInit() {
     this.formKeyUp(this);
@@ -62,16 +68,16 @@ export class LoginComponent implements OnInit {
             );
         }
       }
-      setTimeout(()=>{
+      setTimeout(() => {
         this.submitStatus = false;
-      },2000);
+      }, 2000);
     }
   }
 
   formKeyUp(event) {
-    if(event && event.keyCode === 13){
+    if (event && event.keyCode === 13) {
       this.submit();
-    }else{
+    } else {
       if (this.formModel.email && this.formModel.password) {
         this.loginDisabled = false;
       } else {
@@ -82,5 +88,15 @@ export class LoginComponent implements OnInit {
 
   checkStatus(item) {
     this.formStatus = item;
+  }
+
+  /**
+   * 第三方登录
+   * @param type 
+   */
+  oAuthLogin(type) {
+    if (type === 'github') {
+      this.nativeWindow.open(`${apiConfig.server_ip}/oAuth/github`);
+    }
   }
 }

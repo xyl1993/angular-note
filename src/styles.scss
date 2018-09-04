@@ -6,7 +6,7 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-html, body { height: 100%; }
+html, body { height: 100%;width: 100%; }
 body {
    margin: 0;
    font-family: Helvetica,"Hiragino Sans GB","微软雅黑","Microsoft YaHei UI",SimSun,SimHei,arial,sans-serif;
@@ -113,8 +113,9 @@ app-cointer{
 .icon-add-circle{
   background-position: -200px -50px;
 }
-
-
+.icon-revent{
+  background-position: -126px -25px;
+}
 /****************ueditor样式配置******************/
 .ueditor-textarea{
   height: 100%;

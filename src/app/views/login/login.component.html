@@ -34,11 +34,11 @@
     <div class="third-icon">
       <i class="iconfont icon-weixin" title="微信登录"></i>
       <i class="iconfont icon-qq-copy" title="qq登录"></i>
-      <i class="iconfont icon-github" title="github登录"></i>
+      <i class="iconfont icon-github" (click)="oAuthLogin('github')"  title="github登录"></i>
     </div>
     <div class="other-etic">
       <span *ngIf="formStatus===1">
-        <label>还没有为知笔记帐号？</label>
+        <label>还没有笔记帐号？</label>
         <a (click)="checkStatus(2)">去创建</a>
       </span>
       <span *ngIf="formStatus===2">

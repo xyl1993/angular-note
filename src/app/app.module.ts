@@ -10,6 +10,7 @@ import { HttpModule } from '@angular/http';
  */
 import { TagInputModule } from 'ngx-chips';
 import { ToastModule } from 'primeng/toast';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 /**
  * 插件 end
  */
@@ -20,6 +21,8 @@ import { ApiService } from './utils/api';
 /**
  * service end
  */
+import { DateFormatPipe } from './filters/dateFormat.pipe';
+import { HtmlPipePipe } from './filters/html-pipe.pipe';
 //组件 start
 import { AppComponent } from './app.component';
 import { FullLayoutComponent } from './containers/full-layout/full-layout.component';
@@ -28,8 +31,8 @@ import { NewsComponent } from './views/news/news.component';
 import { HeaderComponent } from './components/header/header.component';
 import { CointerComponent } from './views/cointer/cointer.component';
 import { LoginComponent } from './views/login/login.component';
-import { DateFormatPipe } from './filters/dateFormat.pipe';
-import { HtmlPipePipe } from './filters/html-pipe.pipe';
+import { OauthCallbackComponent } from './views/oAuth/oauth-callback/oauth-callback.component';
+import { BindEmailComponent } from './views/oAuth/bind-email/bind-email.component';
 //组件end
 const appRoutes = [
   { path: '', redirectTo: 'full/cointer', pathMatch: 'full' }, //路径为空
@@ -57,6 +60,16 @@ const appRoutes = [
         path: 'login',
         component: LoginComponent,
         name: '登录'
+      },
+      {
+        path: 'oauthCallback',
+        component: OauthCallbackComponent,
+        name: '授权登录'
+      },
+      {
+        path: 'bindEmail',
+        component: BindEmailComponent,
+        name: '邮箱绑定'
       }
     ]
   },
@@ -71,6 +84,8 @@ const appRoutes = [
     CointerComponent,
     LoginComponent,
     HtmlPipePipe,
+    OauthCallbackComponent,
+    BindEmailComponent,
     HeaderComponent,
     DateFormatPipe
   ],
@@ -82,7 +97,8 @@ const appRoutes = [
     RouterModule.forRoot(appRoutes),
     NgxNeditorModule,
     TagInputModule,
-    ToastModule
+    ToastModule,
+    ConfirmDialogModule
   ],
   exports: [],
   providers: [

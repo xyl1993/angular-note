@@ -1,5 +1,6 @@
 <div class="cointer">
   <p-toast></p-toast>
+  <p-confirmDialog header="提示" icon="pi pi-exclamation-triangle" width="425"></p-confirmDialog>
   <section class="menu-tree" [ngClass]="{'smile':smileStatus}">
     <div class="menu-tree-box">
       <div class="toolbar">
@@ -13,7 +14,7 @@
       <div class="content">
         <ul>
           <li class="menu-item-area" [ngClass]="{'active':seleventIndex===1}" (click)="selNoteList(1)">
-            <i class="my-icon icon-msz icon-write-fat" ></i>
+            <i class="my-icon icon-msz icon-write-fat"></i>
             <div class="dcp-pop pop-float">
               <p>近期笔记</p>
             </div>
@@ -21,7 +22,7 @@
           <li class="menu-item-area">
             <i class="my-icon icon-msz icon-search"></i>
             <div class="dcp-pop pop-float">
-              <input  (keydown.enter)="selNoteList(-1)" [(ngModel)]="keyword" type="text" placeholder="搜索范围 个人笔记">
+              <input (keydown.enter)="selNoteList(-1)" [(ngModel)]="keyword" type="text" placeholder="搜索范围 个人笔记">
             </div>
           </li>
           <li class="menu-item-area">
@@ -96,11 +97,14 @@
           <li>
             <i class="my-icon icon-info-circle" title="笔记信息"></i>
           </li>
-          <li>
+          <!-- <li>
             <i class="my-icon icon-clock" title="历史版本"></i>
-          </li>
+          </li> -->
           <li>
-            <i class="my-icon icon-trash" title="删除"></i>
+            <i class="my-icon icon-trash" (click)="logicDelete()" title="删除"></i>
+          </li>
+          <li *ngIf="seleventIndex===4">
+            <i class="my-icon icon-revent" (click)="recovery()" title="恢复"></i>
           </li>
         </ul>
       </div>

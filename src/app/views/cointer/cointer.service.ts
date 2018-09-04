@@ -25,4 +25,19 @@ export class CointerService {
     return this.apiService
       .post(`note/selNoteDetail`, data)
   }
+
+  public logicDelete(data):any {
+    return this.apiService
+      .post(`note/logicDelete`, data)
+  }
+
+  public physicsDelete(data):any{
+    return this.apiService
+      .post(`note/physicsDelete`, data)
+  }
+
+  public recovery(data):any{
+    return this.apiService
+      .post(`note/recovery`, data)
+  }
 }

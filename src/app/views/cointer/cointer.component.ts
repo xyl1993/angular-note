@@ -2,17 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { ueConfig } from '../../global/ueditor.config';
 import { Router } from '@angular/router';
 import { CointerService } from './cointer.service';
-import { MessageService } from 'primeng/api';
+import { MessageService, ConfirmationService } from 'primeng/api';
 import { statusValid } from '../../utils/status-valid';
-import { window } from 'rxjs/operators';
-import {WindowRef} from '../../global/windowRef.service';
-
+import { WindowRef } from '../../global/windowRef.service';
+import { apiConfig } from '../../global/apiConfig';
 
 @Component({
   selector: 'app-cointer',
   templateUrl: './cointer.component.html',
   styleUrls: ['./cointer.component.scss'],
-  providers: [MessageService, CointerService,WindowRef]
+  providers: [MessageService, CointerService, WindowRef, ConfirmationService]
 })
 export class CointerComponent implements OnInit {
 
@@ -39,8 +38,9 @@ export class CointerComponent implements OnInit {
     private router: Router,
     private service: CointerService,
     private messageService: MessageService,
-    private windowRef: WindowRef
-  ) { 
+    private windowRef: WindowRef,
+    private confirmationService: ConfirmationService
+  ) {
     this.nativeWindow = windowRef.getNativeWindow();
   }
 
@@ -69,6 +69,16 @@ export class CointerComponent implements OnInit {
               //如果是首次加载 获取对应的详情
               this.selNoteInfo.index = 0;
               this.selNoteDetail(data[0]._id);
+            } else {
+              this.primitiveNoteInfo = {
+                _id: '',
+                title: '',
+                content: '',
+                tag: [],
+                create_time: '',
+                preview_content: '',
+                file: ''
+              }
             }
           }
         }
@@ -95,7 +105,6 @@ export class CointerComponent implements OnInit {
       res => {
         let { data, code, message } = res;
         if (statusValid(this, code, message)) {
-          console.log(data);
           this.primitiveNoteInfo = data;
         }
       }
@@ -142,6 +151,7 @@ export class CointerComponent implements OnInit {
           this.noteList.unshift(shiftData);
           this.selNoteInfo.index = 0;
           this.primitiveNoteInfo = data;
+          this.editStatus = true;
         }
       }
     );
@@ -149,7 +159,77 @@ export class CointerComponent implements OnInit {
   /**
    * 打开文章
    */
-  sharNewWindows(){
-    this.nativeWindow.open('http://localhost:3001/article?_id=kLqwRldy');
+  sharNewWindows() {
+    if (this.primitiveNoteInfo._id) {
+      this.nativeWindow.open(`${apiConfig.server_ip}/article?_id=${this.primitiveNoteInfo._id}`);
+    }
+  }
+  updateData() {
+    //删除成功后移除数组里面的数据
+    this.noteList.splice(this.selNoteInfo.index, 1);
+    let activeData = {
+      _id: ''
+    };
+    if (this.noteList[this.selNoteInfo.index]) {
+      activeData = this.noteList[this.selNoteInfo.index];
+    } else if (this.noteList[this.selNoteInfo.index - 1]) {
+      this.selNoteInfo.index = this.selNoteInfo.index - 1;
+      activeData = this.noteList[this.selNoteInfo.index];
+    }
+    if (activeData._id) {
+      this.selNoteDetail(activeData._id);
+    }
+  }
+  /**
+   * 删除文章
+   */
+  logicDelete() {
+    if (this.primitiveNoteInfo._id) {
+      this.confirmationService.confirm({
+        message: '确认删除吗?',
+        accept: () => {
+          let pdata = {
+            _id: this.primitiveNoteInfo._id
+          }
+          if (this.seleventIndex === 1) {
+            //逻辑删除
+            this.service.logicDelete(pdata).subscribe(
+              res => {
+                let { data, code, message } = res;
+                if (statusValid(this, code, message)) {
+                  this.updateData();
+                }
+              }
+            )
+          } else if (this.seleventIndex === 4) {
+            //物理删除
+            this.service.physicsDelete(pdata).subscribe(
+              res => {
+                let { data, code, message } = res;
+                if (statusValid(this, code, message)) {
+                  this.updateData();
+                }
+              }
+            )
+          }
+        }
+      });
+    }
+  }
+  /**
+   * 恢复文章
+   */
+  recovery() {
+    let pdata = {
+      _id: this.primitiveNoteInfo._id
+    }
+    this.service.recovery(pdata).subscribe(
+      res => {
+        let { data, code, message } = res;
+        if (statusValid(this, code, message)) {
+          this.updateData();
+        }
+      }
+    )
   }
 }
