@@ -96,7 +96,9 @@ export class LoginComponent implements OnInit {
    */
   oAuthLogin(type) {
     if (type === 'github') {
-      this.nativeWindow.open(`${apiConfig.server_ip}/oAuth/github`);
+      // this.nativeWindow.localtion.href = 
+      let win = this.nativeWindow;
+      win.location.href = `${apiConfig.server_ip}/oAuth/github`;
     }
   }
 }

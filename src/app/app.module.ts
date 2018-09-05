@@ -67,7 +67,7 @@ const appRoutes = [
         name: '授权登录'
       },
       {
-        path: 'bindEmail',
+        path: 'bindEmail/:openId',
         component: BindEmailComponent,
         name: '邮箱绑定'
       }

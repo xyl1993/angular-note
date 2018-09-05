@@ -1,3 +1,26 @@
-<p>
-  bind-email works!
-</p>
+<header>
+  <img src="../../../assets/images/logo.png" alt="">
+</header>
+<div class="login-cointer">
+  <div class="swapper">
+    <h2 class="login-tip">绑定邮箱</h2>
+    <div class="loginarea">
+      <div class="form-control">
+        <div class="col">
+          <input type="text" autocomplete="off" [(ngModel)]="email" placeholder="请输入邮箱" (keyup)="formKeyUp($event)">
+        </div>
+      </div>
+      <div class="form-control">
+        <div class="col">
+          <span class="error" *ngIf="errMessage">{{errMessage}}</span>
+          <button class="btn" [ngClass]="{'disabled':disabledStatus}" (click)="submit()">提交</button>
+        </div>
+      </div>
+    </div>
+    <div class="other-etic">
+      <span>
+        <a  routerLink="/page/login">返回登录</a>
+      </span>
+    </div>
+  </div>
+</div>
