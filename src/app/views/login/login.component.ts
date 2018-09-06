@@ -33,44 +33,59 @@ export class LoginComponent implements OnInit {
   entryClick(e) {
     console.log(e);
   }
+
+  checkEmail(value) {
+    var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$"); //正则表达式
+    if (reg.test(value)) {
+      return true
+    }else{
+      return false
+    }
+    
+  }
   submit() {
     if (!this.submitStatus) {
-      this.submitStatus = true;
-      //登录
-      if (!this.loginDisabled) {
-        if (this.formStatus === 1) {
-          this.service
-            .dtlogin(this.formModel)
-            .subscribe(
-              res => {
-                let { data, token, code, message } = res;
-                this.errMessage = message;
-                if (code === 200) {
-                  localStorage.setItem("noteToken", token);
-                  localStorage.setItem("noteUser", JSON.stringify(data));
-                  this.router.navigateByUrl('/full/cointer');
+      if (this.checkEmail(this.formModel.email)) {
+        this.submitStatus = true;
+        //登录
+        if (!this.loginDisabled) {
+          if (this.formStatus === 1) {
+            this.service
+              .dtlogin(this.formModel)
+              .subscribe(
+                res => {
+                  let { data, token, code, message } = res;
+                  this.errMessage = message;
+                  this.errMessage = message;
+                  if (code === 200) {
+                    localStorage.setItem("noteToken", token);
+                    localStorage.setItem("noteUser", JSON.stringify(data));
+                    this.router.navigateByUrl('/full/cointer');
+                  }
                 }
-              }
-            );
-        } else {
-          this.service
-            .regist(this.formModel)
-            .subscribe(
-              res => {
-                let { data, token, code, message } = res;
-                this.errMessage = message;
-                if (code === 200) {
-                  localStorage.setItem("noteToken", token);
-                  localStorage.setItem("noteUser", JSON.stringify(data));
-                  this.router.navigateByUrl('/full/cointer');
+              );
+          } else {
+            this.service
+              .regist(this.formModel)
+              .subscribe(
+                res => {
+                  let { data, token, code, message } = res;
+                  this.errMessage = message;
+                  if (code === 200) {
+                    localStorage.setItem("noteToken", token);
+                    localStorage.setItem("noteUser", JSON.stringify(data));
+                    this.router.navigateByUrl('/full/cointer');
+                  }
                 }
-              }
-            );
+              );
+          }
         }
+        setTimeout(() => {
+          this.submitStatus = false;
+        }, 2000);
+      } else {
+        this.errMessage = '请输入正确的邮箱'
       }
-      setTimeout(() => {
-        this.submitStatus = false;
-      }, 2000);
     }
   }
 
@@ -101,4 +116,5 @@ export class LoginComponent implements OnInit {
       win.location.href = `${apiConfig.server_ip}/oAuth/github`;
     }
   }
+
 }
