@@ -1,5 +1,7 @@
 # AngularApp
 
+项目地址：http://47.98.243.170:3001
+
 >1、npm install -g @angular/cli
 
 >2、npm install
