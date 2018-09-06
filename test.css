@@ -1,0 +1,129 @@
+.loader[_ngcontent-c2] {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -mos-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
+  min-width: 33.25em
+}
+
+.loader[_ngcontent-c2] div[_ngcontent-c2] {
+  position: relative;
+  width: 2.5em;
+  height: 2.5em;
+  background: #fff;
+  border-radius: 100%;
+  margin: 0 5px;
+  float: left;
+  font-size: 1.65em;
+  line-height: 2.5em;
+  -webkit-animation: 1.5s ease-in-out infinite bounce;
+  -mos-animation: bounce 1.5s infinite ease-in-out;
+  animation: 1.5s ease-in-out infinite bounce
+}
+
+.loader[_ngcontent-c2] div[_ngcontent-c2]:after {
+  content: '';
+  position: absolute;
+  bottom: -2em;
+  left: .35em;
+  width: 1.8em;
+  height: .5em;
+  background: #322b27;
+  border-radius: 100%
+}
+
+.loader[_ngcontent-c2] div[_ngcontent-c2]:nth-child(1) {
+  -webkit-animation: 1.5s ease-in-out infinite bouncefirst;
+  -mos-animation: bouncefirst 1.5s infinite ease-in-out;
+  animation: 1.5s ease-in-out infinite bouncefirst;
+  background: #db2f00;
+  color: #fff
+}
+
+.loader[_ngcontent-c2] div[_ngcontent-c2]:nth-child(2) {
+  -webkit-animation-delay: 50ms;
+  animation-delay: 50ms;
+  background: #ff6d37;
+  color: #fff
+}
+
+.loader[_ngcontent-c2] div[_ngcontent-c2]:nth-child(3) {
+  -webkit-animation-delay: .1s;
+  animation-delay: 100m;
+  background: #ffa489;
+  color: #fff
+}
+
+.loader[_ngcontent-c2] div[_ngcontent-c2]:nth-child(4) {
+  -webkit-animation-delay: 150ms;
+  animation-delay: 150ms;
+  background: #f2f2f2;
+  color: #555
+}
+
+.loader[_ngcontent-c2] div[_ngcontent-c2]:nth-child(5) {
+  -webkit-animation-delay: .2s;
+  animation-delay: .2s;
+  background: #99d3d4;
+  color: #fff
+}
+
+.loader[_ngcontent-c2] div[_ngcontent-c2]:nth-child(6) {
+  -webkit-animation-delay: 250ms;
+  animation-delay: 250ms;
+  background: #56bebf;
+  color: #fff
+}
+
+.loader[_ngcontent-c2] div[_ngcontent-c2]:nth-child(7) {
+  -webkit-animation-delay: .3s;
+  animation-delay: .3s;
+  color: #fff;
+  background: #13a3a5
+}
+
+@-webkit-keyframes bouncefirst {
+  0%,
+  100%,
+  80% {
+    -webkit-transform: translateX(0)
+  }
+  20%,
+  25% {
+    -webkit-transform: translateX(-50px)
+  }
+  50% {
+    -webkit-transform: translateX(100px)
+  }
+}
+
+20%[_ngcontent-c2],
+25%[_ngcontent-c2] {
+  -mos-transform: translateX(-50px);
+  -webkit-transform: translateX(-50px);
+  transform: translateX(-50px)
+}
+
+100%[_ngcontent-c2],
+20%[_ngcontent-c2],
+28%[_ngcontent-c2],
+80%[_ngcontent-c2] {
+  -mos-transform: translateX(0);
+  -webkit-transform: translateX(0);
+  transform: translateX(0)
+}
+
+50%[_ngcontent-c2] {
+  -mos-transform: translateX(100px);
+  -webkit-transform: translateX(100px);
+  transform: translateX(100px)
+}
