@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxNeditorModule } from '@notadd/ngx-neditor';
+import { QuillModule } from 'ngx-quill'
 import { HttpModule } from '@angular/http';
 /**
  * 插件 start
@@ -96,6 +97,7 @@ const appRoutes = [
     BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes),
     NgxNeditorModule,
+    QuillModule,
     TagInputModule,
     ToastModule,
     ConfirmDialogModule

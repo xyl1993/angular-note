@@ -51,6 +51,8 @@ input:-webkit-autofill {
 app-cointer{
   width: 100%;
 }
+.word-wrap{
+}
 .text-ellipsis{
   overflow: hidden;
   text-overflow: ellipsis;
@@ -137,6 +139,35 @@ app-cointer{
   }
 }
 /****************ueditor样式配置end******************/
+/***********quill配置***************/
+.quill-editor{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+.ql-container{
+  overflow: auto;
+}
+.ql-container.ql-snow {
+  border:none;
+}
+.ql-toolbar.ql-snow{
+  border: none;
+  border-bottom: 1px solid #ccc;
+}
+.ql-editor p{
+  width: 100%;
+}
+.ql-snow .ql-editor pre{
+  width: 100%;
+  overflow: auto !important;
+  white-space: pre;
+}
+/************quill配置**************/
 /***********ng 标签插件设置**********/
 .ng2-tag-input{
   padding-bottom: 0;

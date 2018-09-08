@@ -96,6 +96,9 @@
           </li>
           <li>
             <i class="my-icon icon-info-circle" title="笔记信息"></i>
+            <div class="cirle-info">
+
+            </div>
           </li>
           <!-- <li>
             <i class="my-icon icon-clock" title="历史版本"></i>
@@ -151,10 +154,11 @@
       </div>
       <div class="wiz-document-toolbar" [ngClass]="{'hidden':!editStatus}">
         <!-- 编辑器部分 -->
-        <ngx-neditor [(ngModel)]="primitiveNoteInfo.content" #neditor [config]="ueConfig"></ngx-neditor>
+        <!-- <ngx-neditor [(ngModel)]="primitiveNoteInfo.content" #neditor [config]="ueConfig"></ngx-neditor> -->
+        <quill-editor class="quill-editor" [(ngModel)]="primitiveNoteInfo.content"></quill-editor>
       </div>
-      <div class="notecontent-layer" [ngClass]="{'hidden':editStatus}" [innerHTML]="primitiveNoteInfo.content | htmlPipe">
-        <!-- 文章内容部分 -->
+      <div class="notecontent-layer ql-container ql-snow" id="content" [ngClass]="{'hidden':editStatus}">
+        <div class="ql-editor word-wrap" [innerHTML]="primitiveNoteInfo.content | htmlPipe"></div>
       </div>
     </div>
     <div class="main-box" *ngIf="noteList.length===0">

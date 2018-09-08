@@ -42,6 +42,7 @@ export class CointerComponent implements OnInit {
     private confirmationService: ConfirmationService
   ) {
     this.nativeWindow = windowRef.getNativeWindow();
+    console.log(this.nativeWindow);
   }
 
   ngOnInit() {

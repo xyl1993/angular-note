@@ -222,6 +222,7 @@ section{
   flex: 1;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 .main-box{
   flex: 1;
@@ -346,12 +347,13 @@ section{
   position: relative;
   background: #fff;
   flex: 1;
+  display: flex;
 }
 .notecontent-layer{
   width: 100%;
   background: #fff;
   flex: 1;
-  padding: 12px 20px;
+  padding: 12px 0;
   overflow: auto;
   img{
     max-width: 100% !important;
@@ -373,4 +375,7 @@ section{
 }
 .hidden{
   display: none;
+}
+.cirle-info{
+  position: absolute;
 }
