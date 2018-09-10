@@ -152,12 +152,12 @@
           </div>
         </div>
       </div>
-      <div class="wiz-document-toolbar" [ngClass]="{'hidden':!editStatus}">
+      <div class="wiz-document-toolbar" *ngIf="editStatus">
         <!-- 编辑器部分 -->
         <!-- <ngx-neditor [(ngModel)]="primitiveNoteInfo.content" #neditor [config]="ueConfig"></ngx-neditor> -->
         <quill-editor class="quill-editor" [(ngModel)]="primitiveNoteInfo.content"></quill-editor>
       </div>
-      <div class="notecontent-layer ql-container ql-snow" id="content" [ngClass]="{'hidden':editStatus}">
+      <div class="notecontent-layer ql-container ql-snow" id="content" *ngIf="!editStatus">
         <div class="ql-editor word-wrap" [innerHTML]="primitiveNoteInfo.content | htmlPipe"></div>
       </div>
     </div>
