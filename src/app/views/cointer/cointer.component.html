@@ -47,8 +47,17 @@
         <div class="psersion-title">近期笔记</div>
         <div class="persion-right">
           <div class="icon-group">
-            <i class="my-icon icon-msz icon-sort-modify"></i>
-            <i class="my-icon icon-angle-down"></i>
+            <div (click)="showSortInfo()">
+              <i class="my-icon icon-msz icon-sort-modify"></i>
+              <i class="my-icon" [ngClass]="{'icon-angle-up':this.sortInfo.shown,'icon-angle-down':!this.sortInfo.shown}"></i>
+            </div>
+            <div class="cirle-info sort-cirle-info" [ngClass]="{'shown':sortInfo.shown}">
+              <div class="sort-item" [ngClass]="{'active':item.active}" (click)="inSort(item)" *ngFor="let item of sortInfo.list;index as index;">
+                <i class="my-icon icon-msz icon-sort-modify"></i>
+                <div class="sort-content">{{item.name}}</div>
+                <i class="color-icon" [ngClass]="{'color-icon-up':item.status ==='asc','color-icon-down':item.status ==='desc'}"></i>
+              </div>
+            </div>
           </div>
           <button class="new-btn" (click)="createNewNote()">
             + 新建笔记
@@ -88,25 +97,38 @@
       </button>
       <div class="docTools">
         <ul>
-          <li>
+          <li class="tool-item">
             <i class="my-icon icon-share" title="分享"></i>
           </li>
-          <li>
+          <li class="tool-item">
             <i class="my-icon icon-fulls" (click)="sharNewWindows()" title="在新窗口打开"></i>
           </li>
-          <li>
-            <i class="my-icon icon-info-circle" title="笔记信息"></i>
-            <div class="cirle-info">
-
+          <li class="tool-item">
+            <i class="my-icon icon-info-circle" title="笔记信息" (click)="showInfo()"></i>
+            <div class="cirle-info" [ngClass]="{'active':infoStatus}">
+              <ul>
+                <li>
+                  <span>作者</span>
+                  <div class="cirle-content">{{primitiveNoteInfo.nike_name}}</div>
+                </li>
+                <li>
+                  <span>创建日期</span>
+                  <div class="cirle-content">{{primitiveNoteInfo.create_time | dateFormat:'YYYY-MM-DD HH:mm'}}</div>
+                </li>
+                <li>
+                  <span>修改日期</span>
+                  <div class="cirle-content">{{primitiveNoteInfo.modify_time| dateFormat:'YYYY-MM-DD HH:mm'}}</div>
+                </li>
+              </ul>
             </div>
           </li>
           <!-- <li>
             <i class="my-icon icon-clock" title="历史版本"></i>
           </li> -->
-          <li>
+          <li class="tool-item">
             <i class="my-icon icon-trash" (click)="logicDelete()" title="删除"></i>
           </li>
-          <li *ngIf="seleventIndex===4">
+          <li class="tool-item" *ngIf="seleventIndex===4">
             <i class="my-icon icon-revent" (click)="recovery()" title="恢复"></i>
           </li>
         </ul>

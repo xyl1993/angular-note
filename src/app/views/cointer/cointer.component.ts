@@ -15,13 +15,15 @@ import { apiConfig } from '../../global/apiConfig';
 })
 export class CointerComponent implements OnInit {
 
-  private primitiveNoteInfo = {
+  public primitiveNoteInfo = {
     _id: '',
     title: '',
     content: '',
     tag: [],
     create_time: '',
     preview_content: '',
+    nike_name:'',
+    modify_time:'',
     file: ''
   };
   public seleventIndex = 1; //默认加载最近日记
@@ -30,9 +32,36 @@ export class CointerComponent implements OnInit {
     index: 0
   };  //文章列表选择索引值
   public smileStatus = false;   //左边部分是否缩小状态
+  public infoStatus = false;     //是否显示信息框
   public ueConfig = ueConfig;  //editor配置
   public editStatus = false;    //文章是新建还是修改
   public noteList = [];     //标题列表list
+
+  public sortInfo = {
+    shown:false,
+    type:1,
+    status:'desc',
+    list:[
+      {
+        active:true,
+        type:1,    //按照创建日期排序
+        name:'创建日期',
+        status:'desc'       //倒叙
+      },
+      {
+        active:false,
+        type:2,    //按照修改日期排序
+        name:'修改日期',
+        status:'desc'       //倒叙
+      },
+      {
+        active:false,
+        type:3,    //按照标题排序
+        name:'标题',
+        status:'desc'       //倒叙
+      }
+    ]
+  }
   nativeWindow: any;
   constructor(
     private router: Router,
@@ -54,12 +83,14 @@ export class CointerComponent implements OnInit {
   /**
    * 加载笔记列表
    */
-  selNoteList(seleventIndex?) {
-    if (seleventIndex !== this.seleventIndex) {
+  selNoteList(seleventIndex,sortStatys?) {
+    if (sortStatys || seleventIndex !== this.seleventIndex) {
       this.seleventIndex = seleventIndex === -1 ? 1 : seleventIndex;
       let pdata = {
         status: this.seleventIndex === 4 ? 0 : this.seleventIndex,
-        keyword: this.keyword
+        keyword: this.keyword,
+        sortStatus:this.sortInfo.status,
+        sortType:this.sortInfo.type
       };
       this.service.selNoteList(pdata).subscribe(
         res => {
@@ -74,11 +105,13 @@ export class CointerComponent implements OnInit {
               this.primitiveNoteInfo = {
                 _id: '',
                 title: '',
+                nike_name:'',
                 content: '',
                 tag: [],
                 create_time: '',
                 preview_content: '',
-                file: ''
+                file: '',
+                modify_time:'',
               }
             }
           }
@@ -120,7 +153,7 @@ export class CointerComponent implements OnInit {
       //编辑状态下保存文章
       let pdata = Object.assign(this.primitiveNoteInfo, {});
       pdata.preview_content = this.primitiveNoteInfo.content ?
-        this.primitiveNoteInfo.content.replace(/<[^>]*>/g, "").substring(0, 31) : '';
+        this.primitiveNoteInfo.content.replace(/<[^>]*>/g, "").substring(0, 60) : '';
       this.service.editNote(pdata).subscribe(
         res => {
           let { data, code, message } = res;
@@ -217,6 +250,14 @@ export class CointerComponent implements OnInit {
       });
     }
   }
+  showInfo(){
+    console.log(1);
+    if(this.primitiveNoteInfo._id){
+      this.infoStatus = !this.infoStatus;
+    }else{
+      this.infoStatus = false;
+    }
+  }
   /**
    * 恢复文章
    */
@@ -232,5 +273,26 @@ export class CointerComponent implements OnInit {
         }
       }
     )
+  }
+  showSortInfo(){
+    this.sortInfo.shown = !this.sortInfo.shown;
+  }
+  inSort(selItem){
+    this.sortInfo.list.forEach((item, i) => {
+      if(item.type === selItem.type){
+        console.log(1);
+        if(item.active === selItem.active){
+          //如果已经点击再点击更改排序状态
+          item.status === 'desc'? item.status ='asc':item.status ='desc';
+        }
+        this.sortInfo.status = item.status;
+        this.sortInfo.type = item.type;
+         //请求
+        this.selNoteList(this.seleventIndex,true);
+        item.active = true;
+      }else{
+        item.active = false;
+      }
+    }); 
   }
 }

@@ -255,7 +255,8 @@ section{
 }
 .docTools{
   float: right;
-  li{
+  li.tool-item{
+    position: relative;
     float: left;
     width: 28px;
     height: 32px;
@@ -378,4 +379,90 @@ section{
 }
 .cirle-info{
   position: absolute;
+  z-index: 10;
+  width: 300px;
+  height: auto;
+  top: 37px;
+  left: -244px;
+  background-color: #fff;
+  border: 2px solid #448aff;
+  cursor: auto;
+  display: none;
+  &.active,&.shown{
+    display: block;
+  }
+  &::before{
+    border: 10px solid transparent;
+    position: absolute;
+    display: block;
+    border-width: 6px;
+    top: -14px;
+    left: auto;
+    right: 33px;
+    content: '';
+    border-bottom-color: #448aff;
+  }
+  ul{
+    li{
+      height: 40px;
+      &:after{
+        display: table;
+        clear: both;
+        content: '';
+      }
+    }
+    span{
+      line-height: 40px;
+      float: left;
+      width: 100px;
+      text-align: right;
+      padding-right: 10px;
+      color: #888;
+      background-color: #F5FAFD;
+      border: none;
+      border-right: 1px solid rgba(68,138,255,.5);
+    }
+    .cirle-content{
+      width: 196px;
+      line-height: 40px;
+      float: left;
+      padding-left: 16px;
+    }
+  }
+  
+}
+.sort-cirle-info{
+  width:125px;
+  top: 31px;
+  left: -7px;
+  &::before{
+    right: 91px;
+  }
+  .sort-item{
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    height: 48px;
+    align-items: center;
+    color: #888;
+    padding: 10px;
+    &:hover{
+      background-color: #ececec;
+      color: #000;
+    }
+    &.active{
+      background: #C5E7FF;
+      color: #000;
+    }
+    .sort-content{
+      flex:1;
+      padding-left: 5px;
+    }
+  }
+}
+.color-icon-up{
+  background-position: -125px -25px;
+}
+.color-icon-down{
+  background-position: -100px -25px;
 }

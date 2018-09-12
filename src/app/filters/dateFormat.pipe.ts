@@ -13,7 +13,6 @@ const moment = require("moment");
 @Pipe({name: 'dateFormat'})
 export class DateFormatPipe implements PipeTransform {
   transform(value: string, exponent: string): string {
-    console.log(moment(value).format(exponent));
     return value ? moment(value).format(exponent) : '';
   }
 }
