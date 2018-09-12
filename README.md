@@ -1,5 +1,6 @@
 # AngularApp
 
+此项目为笔记客户端，服务端地址：https://github.com/xyl1993/angular-note-server
 项目地址：http://47.98.243.170:3001
 
 >1、npm install -g @angular/cli

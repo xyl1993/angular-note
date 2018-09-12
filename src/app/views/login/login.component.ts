@@ -116,5 +116,4 @@ export class LoginComponent implements OnInit {
       win.location.href = `${apiConfig.server_ip}/oAuth/github`;
     }
   }
-
 }
