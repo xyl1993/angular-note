@@ -7,6 +7,7 @@ import { map, filter, scan } from "rxjs/operators";
 import { apiConfig } from '../global/apiConfig';
 import { pipe } from '@angular/core/src/render3/pipe';
 
+
 @Injectable()
 export class ApiService {
   public timeout = 3000;

@@ -15,6 +15,10 @@ import { apiConfig } from '../../global/apiConfig';
 })
 export class CointerComponent implements OnInit {
 
+  public statusPop = {
+    noteLoading:true
+  }
+
   public primitiveNoteInfo = {
     _id: '',
     title: '',
@@ -140,11 +144,13 @@ export class CointerComponent implements OnInit {
    * @param _id 查看详情
    */
   selNoteDetail(_id) {
+    this.statusPop.noteLoading = true;
     this.service.selNoteDetail({ _id: _id }).subscribe(
       res => {
         let { data, code, message } = res;
         if (statusValid(this, code, message)) {
           this.primitiveNoteInfo = data;
+          this.statusPop.noteLoading = false;
         }
       }
     );

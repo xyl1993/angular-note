@@ -180,6 +180,7 @@
         <quill-editor class="quill-editor" [(ngModel)]="primitiveNoteInfo.content"></quill-editor>
       </div>
       <div class="notecontent-layer ql-container ql-snow" id="content" *ngIf="!editStatus">
+        <!-- <p-progressSpinner class="abs-middle-ware" [ngClass]="{'show':statusPop.noteLoading,'hide':!statusPop.noteLoading}"></p-progressSpinner> -->
         <div class="ql-editor word-wrap" [innerHTML]="primitiveNoteInfo.content | htmlPipe"></div>
       </div>
     </div>

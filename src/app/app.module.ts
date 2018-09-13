@@ -12,6 +12,9 @@ import { HttpModule } from '@angular/http';
 import { TagInputModule } from 'ngx-chips';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
+// for Http import LoadingBarHttpModule:
+import { LoadingBarHttpModule } from '@ngx-loading-bar/http';
 /**
  * 插件 end
  */
@@ -100,7 +103,9 @@ const appRoutes = [
     QuillModule,
     TagInputModule,
     ToastModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    ProgressSpinnerModule,
+    LoadingBarHttpModule
   ],
   exports: [],
   providers: [

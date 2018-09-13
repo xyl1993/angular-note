@@ -51,11 +51,23 @@ input:-webkit-autofill {
 app-cointer{
   width: 100%;
 }
-
+.hide{
+  display: none;
+}
+.show{
+  display: block;
+}
 .text-ellipsis{
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+/*水平垂直居中*/
+.abs-middle-ware{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
 }
 .my-icon{
   display: inline-block;
