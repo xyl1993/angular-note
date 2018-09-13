@@ -36,7 +36,7 @@ export class CointerComponent implements OnInit {
   public ueConfig = ueConfig;  //editor配置
   public editStatus = false;    //文章是新建还是修改
   public noteList = [];     //标题列表list
-
+  public menuTitle = '近期笔记';   //标题
   public sortInfo = {
     shown:false,
     type:1,
@@ -86,6 +86,11 @@ export class CointerComponent implements OnInit {
   selNoteList(seleventIndex,sortStatys?) {
     if (sortStatys || seleventIndex !== this.seleventIndex) {
       this.seleventIndex = seleventIndex === -1 ? 1 : seleventIndex;
+      this.menuTitle = {
+        1:'近期笔记',
+        2:'我的分享',
+        4:'回收站'
+      }[this.seleventIndex];
       let pdata = {
         status: this.seleventIndex === 4 ? 0 : this.seleventIndex,
         keyword: this.keyword,

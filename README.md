@@ -43,8 +43,9 @@
 
   >ng g s my-new-service // 新建服务
 
-
+第一个富文本选择了某大神封装的ueditor插件
 #ngx-neditor https://github.com/notadd/ngx-neditor
+后来改为 quill-editor 
 
 #项目打包 
 
