@@ -40,4 +40,9 @@ export class CointerService {
     return this.apiService
       .post(`note/recovery`, data)
   }
+
+  public upload(data):any{
+    return this.apiService
+      .post(`note/upload`, data)
+  }
 }

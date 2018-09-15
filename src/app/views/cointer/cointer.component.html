@@ -177,7 +177,7 @@
       <div class="wiz-document-toolbar" *ngIf="editStatus">
         <!-- 编辑器部分 -->
         <!-- <ngx-neditor [(ngModel)]="primitiveNoteInfo.content" #neditor [config]="ueConfig"></ngx-neditor> -->
-        <quill-editor class="quill-editor" [(ngModel)]="primitiveNoteInfo.content"></quill-editor>
+        <quill-editor (onEditorCreated)="EditorCreated($event)"  class="quill-editor" [(ngModel)]="primitiveNoteInfo.content"></quill-editor>
       </div>
       <div class="notecontent-layer ql-container ql-snow" id="content" *ngIf="!editStatus">
         <!-- <p-progressSpinner class="abs-middle-ware" [ngClass]="{'show':statusPop.noteLoading,'hide':!statusPop.noteLoading}"></p-progressSpinner> -->

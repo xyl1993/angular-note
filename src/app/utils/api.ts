@@ -14,7 +14,6 @@ export class ApiService {
   public allowUrls = new RegExp(apiConfig.allowUrls);//'g'
   public noJsonTypeUrls = new RegExp(apiConfig.noJsonTypeUrls);//'g'
 
-
   constructor(public http: Http) {
   }
 
@@ -34,7 +33,7 @@ export class ApiService {
     }
     if (this.noJsonTypeUrls.test(url)) {
       return {}
-    } else {
+    } else{
       return { "Content-Type": "application/json;charset=UTF-8" }
     }
   }

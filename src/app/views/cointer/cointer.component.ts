@@ -16,7 +16,7 @@ import { apiConfig } from '../../global/apiConfig';
 export class CointerComponent implements OnInit {
 
   public statusPop = {
-    noteLoading:true
+    noteLoading: true
   }
 
   public primitiveNoteInfo = {
@@ -26,8 +26,8 @@ export class CointerComponent implements OnInit {
     tag: [],
     create_time: '',
     preview_content: '',
-    nike_name:'',
-    modify_time:'',
+    nike_name: '',
+    modify_time: '',
     file: ''
   };
   public seleventIndex = 1; //默认加载最近日记
@@ -42,31 +42,32 @@ export class CointerComponent implements OnInit {
   public noteList = [];     //标题列表list
   public menuTitle = '近期笔记';   //标题
   public sortInfo = {
-    shown:false,
-    type:1,
-    status:'desc',
-    list:[
+    shown: false,
+    type: 1,
+    status: 'desc',
+    list: [
       {
-        active:true,
-        type:1,    //按照创建日期排序
-        name:'创建日期',
-        status:'desc'       //倒叙
+        active: true,
+        type: 1,    //按照创建日期排序
+        name: '创建日期',
+        status: 'desc'       //倒叙
       },
       {
-        active:false,
-        type:2,    //按照修改日期排序
-        name:'修改日期',
-        status:'desc'       //倒叙
+        active: false,
+        type: 2,    //按照修改日期排序
+        name: '修改日期',
+        status: 'desc'       //倒叙
       },
       {
-        active:false,
-        type:3,    //按照标题排序
-        name:'标题',
-        status:'desc'       //倒叙
+        active: false,
+        type: 3,    //按照标题排序
+        name: '标题',
+        status: 'desc'       //倒叙
       }
     ]
   }
-  nativeWindow: any;
+  public nativeWindow: any;
+  public editor;
   constructor(
     private router: Router,
     private service: CointerService,
@@ -87,19 +88,19 @@ export class CointerComponent implements OnInit {
   /**
    * 加载笔记列表
    */
-  selNoteList(seleventIndex,sortStatys?) {
+  selNoteList(seleventIndex, sortStatys?) {
     if (sortStatys || seleventIndex !== this.seleventIndex) {
       this.seleventIndex = seleventIndex === -1 ? 1 : seleventIndex;
       this.menuTitle = {
-        1:'近期笔记',
-        2:'我的分享',
-        4:'回收站'
+        1: '近期笔记',
+        2: '我的分享',
+        4: '回收站'
       }[this.seleventIndex];
       let pdata = {
         status: this.seleventIndex === 4 ? 0 : this.seleventIndex,
         keyword: this.keyword,
-        sortStatus:this.sortInfo.status,
-        sortType:this.sortInfo.type
+        sortStatus: this.sortInfo.status,
+        sortType: this.sortInfo.type
       };
       this.service.selNoteList(pdata).subscribe(
         res => {
@@ -114,13 +115,13 @@ export class CointerComponent implements OnInit {
               this.primitiveNoteInfo = {
                 _id: '',
                 title: '',
-                nike_name:'',
+                nike_name: '',
                 content: '',
                 tag: [],
                 create_time: '',
                 preview_content: '',
                 file: '',
-                modify_time:'',
+                modify_time: '',
               }
             }
           }
@@ -165,6 +166,7 @@ export class CointerComponent implements OnInit {
       let pdata = Object.assign(this.primitiveNoteInfo, {});
       pdata.preview_content = this.primitiveNoteInfo.content ?
         this.primitiveNoteInfo.content.replace(/<[^>]*>/g, "").substring(0, 60) : '';
+      // pdata.content = this.htmlEncodeByRegExp(pdata.content);   //保存转码
       this.service.editNote(pdata).subscribe(
         res => {
           let { data, code, message } = res;
@@ -261,11 +263,11 @@ export class CointerComponent implements OnInit {
       });
     }
   }
-  showInfo(){
+  showInfo() {
     console.log(1);
-    if(this.primitiveNoteInfo._id){
+    if (this.primitiveNoteInfo._id) {
       this.infoStatus = !this.infoStatus;
-    }else{
+    } else {
       this.infoStatus = false;
     }
   }
@@ -285,25 +287,78 @@ export class CointerComponent implements OnInit {
       }
     )
   }
-  showSortInfo(){
+  showSortInfo() {
     this.sortInfo.shown = !this.sortInfo.shown;
   }
-  inSort(selItem){
+  inSort(selItem) {
     this.sortInfo.list.forEach((item, i) => {
-      if(item.type === selItem.type){
+      if (item.type === selItem.type) {
         console.log(1);
-        if(item.active === selItem.active){
+        if (item.active === selItem.active) {
           //如果已经点击再点击更改排序状态
-          item.status === 'desc'? item.status ='asc':item.status ='desc';
+          item.status === 'desc' ? item.status = 'asc' : item.status = 'desc';
         }
         this.sortInfo.status = item.status;
         this.sortInfo.type = item.type;
-         //请求
-        this.selNoteList(this.seleventIndex,true);
+        //请求
+        this.selNoteList(this.seleventIndex, true);
         item.active = true;
-      }else{
+      } else {
         item.active = false;
       }
-    }); 
+    });
   }
+  EditorCreated(quill) {
+    const toolbar = quill.getModule('toolbar');
+    toolbar.addHandler('image', this.imageHandler.bind(this));
+    this.editor = quill;
+  }
+  imageHandler() {
+    const Imageinput = document.createElement('input');
+    Imageinput.setAttribute('type', 'file');
+    Imageinput.setAttribute('accept', 'image/png, image/gif, image/jpeg, image/bmp, image/x-icon');
+    Imageinput.classList.add('ql-image');
+    Imageinput.addEventListener('change', () => {
+      const file = Imageinput.files[0];
+      const data: FormData = new FormData();
+      data.append('file', file, file.name);
+      this.service.upload(data).subscribe(
+        res => {
+          let { data, code, message } = res;
+          if (statusValid(this, code, message)) {
+            const range = this.editor.getSelection(true);
+            const index = range.index + range.length;
+            this.editor.insertEmbed(range.index, 'image', data.url);
+          }
+        }
+      )
+    });
+    Imageinput.click();
+  }
+  /*用正则表达式实现html转码*/
+  htmlEncodeByRegExp(str) {
+    var s = "";
+    if (str.length == 0) return "";
+    s = str.replace(/&/g, "&amp;");
+    s = s.replace(/</g, "&lt;");
+    s = s.replace(/>/g, "&gt;");
+    s = s.replace(/\'/g, "&#39;");
+    s = s.replace(/\"/g, "&quot;");
+    s = s.replace(/\n"/g, "");
+    s = s.replace(/\r"/g, "");
+    return s;
+  }
+  /*用正则表达式实现html解码*/
+  htmlDecodeByRegExp(str) {
+    var s = "";
+    if (str.length == 0) return "";
+    s = str.replace(/&amp;/g, "&");
+    s = s.replace(/&lt;/g, "<");
+    s = s.replace(/&gt;/g, ">");
+    s = s.replace(/&nbsp;/g, " ");
+    s = s.replace(/&#39;/g, "\'");
+    s = s.replace(/&quot;/g, "\"");
+    return s;
+  }
+
 }
