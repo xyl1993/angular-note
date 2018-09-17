@@ -52,3 +52,8 @@
 ng build --prod --build-optimizer --aot
 
 >将打包后dist/angular-app/下的文件复制到server端的public中
+
+#项目打截图
+![内容图片](http://oq4pg1mfz.bkt.clouddn.com/file-1537175812985.png)
+![详情图片](http://oq4pg1mfz.bkt.clouddn.com/file-1537175835896.png)
+
