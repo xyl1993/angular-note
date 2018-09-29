@@ -75,11 +75,11 @@
               </h4>
             </div>
             <div class="abstract">
-              <p class="abstract_text multiLine-text" [innerHTML]="item.preview_content">
+              <p class="abstract_text multiLine-text" [innerHTML]="item.previewContent">
               </p>
             </div>
             <div class="time-info">
-              <span class="time">{{item.create_time | dateFormat:'YYYY-MM-DD HH:mm'}}</span>
+              <span class="time">{{item.createdAt | dateFormat:'YYYY-MM-DD HH:mm'}}</span>
               <!-- <span class="owner">602165057@qq.com</span> -->
             </div>
           </li>
@@ -109,15 +109,15 @@
               <ul>
                 <li>
                   <span>作者</span>
-                  <div class="cirle-content">{{primitiveNoteInfo.nike_name}}</div>
+                  <div class="cirle-content">{{primitiveNoteInfo.nikeName}}</div>
                 </li>
                 <li>
                   <span>创建日期</span>
-                  <div class="cirle-content">{{primitiveNoteInfo.create_time | dateFormat:'YYYY-MM-DD HH:mm'}}</div>
+                  <div class="cirle-content">{{primitiveNoteInfo.createdAt | dateFormat:'YYYY-MM-DD HH:mm'}}</div>
                 </li>
                 <li>
                   <span>修改日期</span>
-                  <div class="cirle-content">{{primitiveNoteInfo.modify_time| dateFormat:'YYYY-MM-DD HH:mm'}}</div>
+                  <div class="cirle-content">{{primitiveNoteInfo.updatedAt| dateFormat:'YYYY-MM-DD HH:mm'}}</div>
                 </li>
               </ul>
             </div>

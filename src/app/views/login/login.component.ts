@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { LoginService } from './login.service';
 import { WindowRef } from '../../global/windowRef.service';
 import { apiConfig } from '../../global/apiConfig';
+import { statusValid } from '../../utils/status-valid';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -54,10 +55,8 @@ export class LoginComponent implements OnInit {
               .dtlogin(this.formModel)
               .subscribe(
                 res => {
-                  let { data, token, code, message } = res;
-                  this.errMessage = message;
-                  this.errMessage = message;
-                  if (code === 200) {
+                  let { data, token, code } = res;
+                  if (statusValid(this, code, data)) {
                     localStorage.setItem("noteToken", token);
                     localStorage.setItem("noteUser", JSON.stringify(data));
                     this.router.navigateByUrl('/full/cointer');
@@ -71,7 +70,7 @@ export class LoginComponent implements OnInit {
                 res => {
                   let { data, token, code, message } = res;
                   this.errMessage = message;
-                  if (code === 200) {
+                  if (statusValid(this, code, data)) {
                     localStorage.setItem("noteToken", token);
                     localStorage.setItem("noteUser", JSON.stringify(data));
                     this.router.navigateByUrl('/full/cointer');

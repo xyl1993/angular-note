@@ -24,10 +24,10 @@ export class CointerComponent implements OnInit {
     title: '',
     content: '',
     tag: [],
-    create_time: '',
-    preview_content: '',
-    nike_name: '',
-    modify_time: '',
+    createdAt: '',
+    previewContent: '',
+    nikeName: '',
+    updatedAt: '',
     file: ''
   };
   public seleventIndex = 1; //默认加载最近日记
@@ -104,8 +104,9 @@ export class CointerComponent implements OnInit {
       };
       this.service.selNoteList(pdata).subscribe(
         res => {
-          let { data, code, message } = res;
-          if (statusValid(this, code, message)) {
+          let { data, code } = res;
+          console.log(res);
+          if (statusValid(this, code, data)) {
             this.noteList = data;
             if (data.length > 0) {
               //如果是首次加载 获取对应的详情
@@ -115,13 +116,13 @@ export class CointerComponent implements OnInit {
               this.primitiveNoteInfo = {
                 _id: '',
                 title: '',
-                nike_name: '',
+                nikeName: '',
                 content: '',
                 tag: [],
-                create_time: '',
-                preview_content: '',
+                createdAt: '',
+                previewContent: '',
                 file: '',
-                modify_time: '',
+                updatedAt: '',
               }
             }
           }
@@ -148,8 +149,8 @@ export class CointerComponent implements OnInit {
     this.statusPop.noteLoading = true;
     this.service.selNoteDetail({ _id: _id }).subscribe(
       res => {
-        let { data, code, message } = res;
-        if (statusValid(this, code, message)) {
+        let { data, code } = res;
+        if (statusValid(this, code, data)) {
           this.primitiveNoteInfo = data;
           this.statusPop.noteLoading = false;
         }
@@ -164,13 +165,13 @@ export class CointerComponent implements OnInit {
       //点击编辑
       //编辑状态下保存文章
       let pdata = Object.assign(this.primitiveNoteInfo, {});
-      pdata.preview_content = this.primitiveNoteInfo.content ?
+      pdata.previewContent = this.primitiveNoteInfo.content ?
         this.primitiveNoteInfo.content.replace(/<[^>]*>/g, "").substring(0, 60) : '';
       // pdata.content = this.htmlEncodeByRegExp(pdata.content);   //保存转码
       this.service.editNote(pdata).subscribe(
         res => {
-          let { data, code, message } = res;
-          if (statusValid(this, code, message)) {
+          let { data, code } = res;
+          if (statusValid(this, code, data)) {
             this.noteList[this.selNoteInfo.index] = pdata;
             this.messageService.add({ severity: 'success', summary: '提示', detail: '保存成功' });
             this.editStatus = false;
@@ -192,8 +193,8 @@ export class CointerComponent implements OnInit {
     //向后台请求插入记录
     this.service.addNote(note).subscribe(
       res => {
-        let { data, code, message } = res;
-        if (statusValid(this, code, message)) {
+        let { data, code } = res;
+        if (statusValid(this, code, data)) {
           let shiftData = Object.assign({}, data);
           this.noteList.unshift(shiftData);
           this.selNoteInfo.index = 0;
@@ -242,8 +243,8 @@ export class CointerComponent implements OnInit {
             //逻辑删除
             this.service.logicDelete(pdata).subscribe(
               res => {
-                let { data, code, message } = res;
-                if (statusValid(this, code, message)) {
+                let { data, code } = res;
+                if (statusValid(this, code, data)) {
                   this.updateData();
                 }
               }
@@ -252,8 +253,8 @@ export class CointerComponent implements OnInit {
             //物理删除
             this.service.physicsDelete(pdata).subscribe(
               res => {
-                let { data, code, message } = res;
-                if (statusValid(this, code, message)) {
+                let { data, code } = res;
+                if (statusValid(this, code, data)) {
                   this.updateData();
                 }
               }
@@ -280,8 +281,8 @@ export class CointerComponent implements OnInit {
     }
     this.service.recovery(pdata).subscribe(
       res => {
-        let { data, code, message } = res;
-        if (statusValid(this, code, message)) {
+        let { data, code } = res;
+        if (statusValid(this, code, data)) {
           this.updateData();
         }
       }
@@ -324,8 +325,8 @@ export class CointerComponent implements OnInit {
       data.append('file', file, file.name);
       this.service.upload(data).subscribe(
         res => {
-          let { data, code, message } = res;
-          if (statusValid(this, code, message)) {
+          let { data, code } = res;
+          if (statusValid(this, code, data)) {
             const range = this.editor.getSelection(true);
             const index = range.index + range.length;
             this.editor.insertEmbed(range.index, 'image', data.url);

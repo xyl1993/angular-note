@@ -33,8 +33,8 @@ export class OauthCallbackComponent implements OnInit {
       .github_callback(`login/github_callback?code=${this.code}&state=${this.state}`)
       .subscribe(
         res => {
-          let { data, openId, token, code, message } = res;
-          if (statusValid(this, code, message)) {
+          let { data, openId, token, code } = res;
+          if (statusValid(this, code, data)) {
             if (openId) {
               //返回openid说明没有绑定邮箱，跳转到绑定邮箱页面
               this.router.navigate(['/page/bindEmail',openId]);

@@ -13,32 +13,32 @@ export class CointerService {
 
   public selNoteList(data): any {
     return this.apiService
-      .post(`note/selNoteList`, data)
+      .get(`note/selNoteList`, data)
   }
 
   public editNote(data): any {
     return this.apiService
-      .post(`note/editNote`, data)
+      .put(`note/editNote/${data._id}`, data)
   }
   
   public selNoteDetail(data): any {
     return this.apiService
-      .post(`note/selNoteDetail`, data)
+      .get(`note/selNoteDetail/${data._id}`)
   }
 
   public logicDelete(data):any {
     return this.apiService
-      .post(`note/logicDelete`, data)
+      .put(`note/logicDelete/${data._id}`)
   }
 
   public physicsDelete(data):any{
     return this.apiService
-      .post(`note/physicsDelete`, data)
+      .delete(`note/physicsDelete/${data._id}`)
   }
 
   public recovery(data):any{
     return this.apiService
-      .post(`note/recovery`, data)
+      .put(`note/recovery/${data._id}`)
   }
 
   public upload(data):any{

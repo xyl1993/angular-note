@@ -31,7 +31,7 @@ export class HeaderComponent implements OnInit {
     index: 1           //近期消息
   }
   userInfo = {
-    nike_name:'',
+    nikeName:'',
     portrait:''
   };
   userStatus = false;

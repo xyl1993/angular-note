@@ -7,30 +7,19 @@ const lifeTime = 2000;   //弹窗隐藏时间
  * @param {*} message 
  */
 export const statusValid = (that, code, message) => {
-  if (code === -403) {
+  if (code === 401) {
     that.messageService.add({ severity: 'warn', summary: '提示', detail: timeoutText,life:lifeTime });
     setTimeout(() => {
       that.router.navigateByUrl('/page/login');
     }, 2000);
     return false
   }
-  if (code === -404) {
-    that.messageService.add({ severity: 'error', summary: '提示', detail: '服务器出错',life:lifeTime });
+  if (code === 404) {
+    that.messageService.add({ severity: 'error', summary: '提示', detail: '地址不存在',life:lifeTime });
     return false
   }
-  if (code === 0) {
-    if (message === '登录过期') {
-      that.messageService.add({ severity: 'warn', summary: '提示', detail: timeoutText,life:lifeTime });
-      setTimeout(() => {
-        localStorage.removeItem("user");
-        localStorage.removeItem("noteToken");
-        that.router.navigateByUrl('/page/login');
-      }, 2000);
-      return false
-    } else {
-      that.messageService.add({ severity: 'warn', summary: '提示', detail: message,life:lifeTime });
-    }
-    return false
+  if(code === 403) {
+    return that.messageService.add({ severity: 'warn', summary: '提示', detail: message,life:lifeTime });
   }
   return true
 }
